@@ -1,0 +1,97 @@
+{% extends 'frontend/main/base.html' %}
+{% block title %} O'zbekiston Finlandiya Pedagogika Instituti Yosh ijodkorlarni namoyon qilish portali {% endblock title %}
+{% block content %}		
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% for message in messages %}
+  {% if message.tags == 'success' %}
+    <script>
+        var m = '{{ message }}';
+        swal('Congratulation !', m, "success")
+    </script>
+    {% elif message.tags == 'error' %}
+    <script>
+      var m = '{{ message }}';
+      swal('Ogohlantirish', m, "info")
+    </script>
+  {% endif %}
+{% endfor %}
+		<section class="page-header" data-bg-image="/static/media/background/music.jpg">
+			<div class="tim-container">
+				<div class="page-header-title text-center">
+					<h3>Yangi  musiqalar</h3>
+					<h2></h2>
+				</div>
+
+				<div class="breadcrumbs">
+					<a href="#">Bosh sahifa</a>
+					<span>/</span>
+					<span>Yangi musiqalar</span>
+				</div>
+
+			</div>
+		</section>
+
+		<section id="music-tabs" class="section-padding">
+			<div class="container table-responsive">
+                <table class="table table-hover border table-sm" style="border-radius: 20px;">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                        <th scope="col">Ovozlar</th>
+                        <th scope="col">Ovoz berish</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for song in song_comp %}
+                        <tr>
+                            <th scope="row">{{song.id}}</th>
+                            <td><a href="aritist.html"><a href="{{song.audio_file.url}}" class="sm2_button sm2_paused"><i></i>{{song.user}}</a></a></td>
+                            <td>{{ song.song_title }}</td>
+                            <td><a href="{{ song.audio_file.url }}" target="_blank" class="song-download"><i class="fa fa-download"></i></a></td>
+                            <td>{{song.votes.count}}</td>
+                            <td><a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalfully{{song.id}}">Ovoz berish</a></td>
+                        </tr>
+                        <div class="modal fade" id="exampleModalfully{{song.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" style="color: #007bff;" id="exampleModalLabel"><span class="fa fa-phone fa-1x"></span> Ovoz berish #: {{song.id}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body p-4">
+                                    <div class="row">
+                                        <form action="" method="post">{% csrf_token %}
+                                          <div class="input-group mb-3">
+                                            <input type="text" class="form-control phone" name="phone_number" data-inputmask='"mask": "+998(99) 999-99-99"' data-mask>
+                                            <div class="input-group-append">
+                                              <div class="input-group-text">
+                                                <span class="fa fa-phone"></span>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="input-group mb-3">
+                                            <input type="text" class="form-control" value="{{song.id}}" name="product_id" hidden>
+                                          </div>
+                                          <button class="btn btn-primary" type="submit">Jo'natish</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="background-color: #007bff;">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+
+                      {% endfor %}
+                  </table>
+			</div>
+		</section>
+    
+
+		{% endblock content %}		

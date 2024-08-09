@@ -1,0 +1,150 @@
+{% extends 'frontend/main/base.html' %}
+{% block title %} O'zbekiston Finlandiya Pedagogika Instituti Yosh ijodkorlarni namoyon qilish portali {% endblock title %}
+{% block content %}		
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% for message in messages %}
+  {% if message.tags == 'success' %}
+    <script>
+        var m = '{{ message }}';
+        swal('Congratulation !', m, "success")
+    </script>
+    {% elif message.tags == 'error' %}
+    <script>
+      var m = '{{ message }}';
+      swal('Ogohlantirish', m, "info")
+    </script>
+  {% endif %}
+{% endfor %}
+
+		<section class="page-header" data-bg-image="/static/media/background/video.jpg">
+			<div class="tim-container">
+				<div class="page-header-title text-center">
+					<h3>Competition Videos</h3>
+					<h2></h2>
+				</div>
+
+				<div class="breadcrumbs">
+					<a href="#">Bosh sahifa</a>
+					<span>/</span>
+					<span>Competition Videos</span>
+				</div>
+
+			</div>
+		</section>
+
+    
+    
+<section style="background-color: #f4f6f9;">
+    <div class="container pt-5 pb-5">
+        <div class="card">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card-header">
+                        <h3 class="card-title">Videolar ro'yxati</h3>
+                      </div>
+                </div>
+             </div>
+            <!-- /.card-header -->
+            <div class="table-responsive">
+                <div class="card-body ">
+                    <table id="example" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th>#ID</th>
+                        <th>Video nomi</th>
+                        <th>Videoni ko'rish</th>
+                        <th>Ovozlar Soni</th>
+                        <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {% for video in video_comp %}
+                      <tr>
+                        <td>{{video.id}}</td>
+                        <td>{{video.title}}</td>
+                        <td class="text-center" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModalfully{{video.id}}"><span class="fa fa-video-camera fa-1x text-primary"></span></td>
+                        <td class="text-center">{{ video.votes.count }}</td>
+                        <td class="text-center"><a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalVOTE{{video.id}}">Ovoz berish</a></td>
+                      </tr>
+                            <!-- View Sher Fully -->
+                            <div class="modal fade" id="exampleModalfully{{video.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-text text-primary"></i> {{video.title}}</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="row">
+                                      <div class="col-md-1">
+        
+                                      </div>
+                                      <div class="col-md-10">
+                                        <video width="100%" controls>
+                                            <source src="{{video.videofile.url}}" type="video/mp4">
+                                            Your browser does not support HTML5 video.
+                                          </video>
+                                      </div>
+                                      <div class="col-md-1">
+        
+                                      </div>
+                                    </div>
+                                  
+                                  </div>
+                                  <div class="modal-footer" style="background-color: #007bff;">
+                                  </div>
+                              </div>
+                              </div>
+                          </div>
+                          <!--  -->
+
+                          <div class="modal fade" id="exampleModalVOTE{{video.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" style="color: #007bff;" id="exampleModalLabel"><span class="fa fa-phone fa-1x"></span> Ovoz berish #: {{video.id}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body p-4">
+                                    <div class="row">
+                                        <form action="" method="post">{% csrf_token %}
+                                          <div class="input-group mb-3">
+                                            <input type="text" class="form-control phone" name="phone_number" data-inputmask='"mask": "+998(99) 999-99-99"' data-mask>
+                                            <div class="input-group-append">
+                                              <div class="input-group-text">
+                                                <span class="fa fa-phone"></span>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="input-group mb-3">
+                                            <input type="text" class="form-control" value="{{video.id}}" name="product_id" hidden>
+                                          </div>
+                                          <button class="btn btn-primary" type="submit">Jo'natish</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="background-color: #007bff;">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                      {% endfor %}
+               
+                      </tfoot>
+                    </table>
+                  </div>
+            </div>
+          </div>
+    </div>
+</section>
+
+
+  
+	
+
+
+		{% endblock content %}		

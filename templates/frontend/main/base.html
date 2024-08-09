@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}	
+<head>
+	<!-- Meta Data -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>IJODKOR — {% block title %}  {% endblock title %}</title>
+
+	<!-- Fav Icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/img/fav-icons/apple-touch-icon.png' %}">
+	<!-- <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/img/fav-icons/favicon-32x3IJODKOR.png' %}"> -->
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/fav-icons/favicon-16x16.png' %}">
+	<meta name="theme-color" content="#e8300c">
+
+	<!-- Dependency Styles -->
+	<link rel="stylesheet" href="{% static 'dependencies/bootstrap/css/bootstrap.min.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'dependencies/intro/css/stylesheet.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'dependencies/swiper/swiper.min.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'dependencies/font-awesome/css/font-awesome.min.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'dependencies/wow/css/animate.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'dependencies/magnific-popup/magnific-popup.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'dependencies/jquery-ui/css/jquery-ui.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'dependencies/slick-carousel/css/slick.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'dependencies/colornip/css/colornip.min.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'dependencies/css-loader/css/css-loader.css' %}" type="text/css">
+
+	<!-- Site Stylesheet -->
+	<link rel="stylesheet" href="{% static 'assets/css/woocommerce.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" type="text/css">
+
+	<link rel="stylesheet" href="{% static 'assets/css/app.css' %}" type="text/css">
+	<!-- <link id="theme" rel="stylesheet" href="{% static 'assets/css/theme-color/theme-default.css' %}" type="text/css"> -->
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+
+</head>
+<style>
+
+a{
+	text-decoration: none;
+	padding-bottom: 5px;
+}
+
+.modal-dialog {
+      max-width: 800px;
+      margin: 30px auto;
+  }
+
+.modal-body {
+  position:relative;
+  padding:0px;
+}
+.btn-close {
+  position:absolute;
+  right:-30px;
+  top:0;
+}
+</style>
+
+<body id="home-version-1" class="home-version-1" data-style="default">
+	<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/1.16.1/css/all.min.css" rel="stylesheet"> -->
+	<div id="site">
+
+
+	
+
+
+
+		<!--=========================-->
+		<!--=        Navbar         =-->
+		<!--=========================-->
+		<header class="header">
+			<div class="top-header">
+				<div class="tim-container clearfix">
+					<ul class="site-social-link">
+						<li><a href=""><i class="fa fa-facebook"></i></a></li>
+						<li><a href=""><i class="fa fa-twitter"></i></a></li>
+						<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+						<li><a href=""><i class="fa fa-pinterest-p"></i></a></li>
+						<li><a href=""><i class="fa fa-instagram"></i></a></li>
+						<li>Diqqat!!! Sayt test rejimida ishlamoqda!</i>
+					</ul>
+					<!-- /.site-social-link -->
+
+					<ul class="user-login float-right">
+						<li><a href="{% url 'login' %}">Login</a></li>
+						<li><a href="{{ hemis_auth_url }}">Hemis</a></li>
+						<li><a href="{% url 'registration' %}">Registration</a></li>
+					</ul>
+				</div>
+				<!-- /.tim-container -->
+			</div>
+			<!-- /.top-header -->
+
+			<div class="header-inner">
+				<div class="tim-container clearfix">
+					<div id="site-logo" class="float-left">
+						<a href="{% url 'index' %}" class="logo-main">
+							<img src="{% static 'assets/img/IJODKOR.png' %}" alt="logo">
+						</a>
+
+						<a href="{% url 'index' %}l" class="logo-stickky">
+							<img src="{% static 'assets/img/IJODKOR.png' %}" alt="logo">
+						</a>
+					</div>
+					<div class="nav float-right">
+						<ul id="main-header-menu">
+							<li class="menu-item-has-children active">
+								<a href="{% url 'index' %}">Bosh sahifa</a>
+							</li>
+							<li class="menu-item-has-children">
+								<a href="#">Musiqalar</a>
+								<ul class="sub-menu">
+									<li><a href="{% url 'top_music' %}">Top musiqalar</a></li>
+									<li><a href="{% url 'new_music' %}">Eng yangi musiqalar</a></li>
+								</ul>
+							</li>
+							<li class="menu-item-has-children">
+								<a href="#">Kliplar</a>
+								<ul class="sub-menu">
+									<li><a href="{% url 'top_video' %}">Top kliplar</a></li>
+									<li><a href="{% url 'new_video' %}">Eng yangi kliplar</a></li>
+								</ul>
+							</li>
+							<li class="menu-item-has-children">
+								<a href="#">Rasmlar</a>
+								<ul class="sub-menu">
+									<li><a href="{% url 'top_photo' %}">Eng mashhur rasmlar</a></li>
+									<li><a href="{% url 'new_photo' %}">Eng yangi rasmlar</a></li>
+								</ul>
+							</li>
+							<li class="menu-item-has-children">
+								<a href="#">Sherlar</a>
+								<ul class="sub-menu">
+									<li><a href="{% url 'top_sher' %}">Eng sher mashhurlari</a></li>
+									<li><a href="{% url 'new_sher' %}">Eng sher yangilari</a></li>
+								</ul>
+							</li>
+							<li class="menu-item-has-children">
+								<a href="{% url 'aloqa' %}">Bog'lanish</a>
+								
+							</li>
+						</ul>
+						<a href="#" class="head-btn">Telegramda kuzating</a>
+					</div>
+					<!-- /.nav -->
+				</div>
+				<!-- /.tim-container -->
+			</div>
+			<!-- /.header-inner -->
+		</header>
+		<!-- /#header -->
+
+
+
+		<!--=============================-->
+		<!--=        Mobile Nav         =-->
+		<!--=============================-->
+		<header id="mobile-nav-wrap">
+			<div class="mob-header-inner d-flex justify-content-between">
+				<div id="mobile-logo" class="d-flex justify-content-start">
+					<a href="{% url 'index' %}"><img src="{% static 'assets/img/IJODKOR.png' %}" alt="Site Logo"></a>
+				</div>
+
+				<ul class="user-link nav justify-content-end"></ul>
+				<div id="nav-toggle" class="nav-toggle hidden-md">
+					<div class="toggle-inner">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+		</header>
+
+		
+
+		<div class="mobile-menu-inner">
+
+			<div class="mobile-nav-top-wrap">
+				<div class="mob-header-inner clearfix">
+					<div class="d-flex justify-content-start mobile-logo">
+						<a href="{% url 'index' %}">
+					<img src="{% static 'assets/img/IJODKOR.png' %}" alt="Site Logo">
+				</a>
+					</div>
+
+					<div class="close-menu">
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</div>
+				</div>
+				<!-- /.mob-header-inner -->
+
+				<div class="close-menu">
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</div>
+			</div>
+			<!-- /.mobile-nav-top-wrap -->
+
+			<nav id="accordian">
+				<ul class="accordion-menu">
+					<li>
+						<a href="#0" class="{% url 'index' %}">Bosh sahifa</a>
+						
+					</li>
+					<li>
+						<a href="#0" class="dropdownlink">Musiqalar</a>
+						<ul class="submenuItems">
+							<li><a href="{% url 'top_music' %}">Top musiqalar</a></li>
+							<li><a href="{% url 'new_music' %}">Eng yangi musiqalar</a></li>
+						</ul>
+					</li>
+					
+					<li>
+						<a href="#0" class="dropdownlink">Kliplar</a>
+						<ul class="submenuItems">
+							<li><a href="{% url 'top_video' %}">Top kliplar</a></li>
+									<li><a href="{% url 'new_video' %}">Eng yangi kliplar</a></li>
+						</ul>
+					</li>
+					
+					<li>
+						<a href="#0" class="dropdownlink">Rasmlar</a>
+						<ul class="submenuItems">
+							<li><a href="{% url 'top_photo' %}">Eng mashhur rasmlar</a></li>
+							<li><a href="{% url 'new_photo' %}">Eng yangi rasmlar</a></li>
+						</ul>
+					</li>
+
+					
+					<li>
+						<a href="#0" class="dropdownlink">Sherlar</a>
+						<ul class="submenuItems">
+							<li><a href="{% url 'top_sher' %}">Eng sher mashhurlari</a></li>
+							<li><a href="{% url 'new_sher' %}">Eng sher yangilari</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="{% url 'aloqa' %}">Bog'lanish</a>
+					</li>
+
+
+					<ul class="user-login float-right">
+						<li><a href="{% url 'login' %}">Login</a></li>
+						<li><a href="{% url 'registration' %}">Registration</a></li>
+					</ul>
+
+
+
+				</ul>
+			</nav>
+		</div>
+		<!-- /.mobile-menu-inner -->
+
+
+
+		{% block content %}
+		
+		
+		{% endblock content %}
+		
+
+
+	
+		<!--==============================-->
+		<!--=        	Footer         	 =-->
+		<!--==============================-->
+		<footer id="footer">
+			<div class="tim-container">
+				<div class="footer-inner">
+					<div class="row">
+						<div class="col-xl-3 col-lg-6 col-sm-6">
+							<div class="footer-about">
+								<a href="{% url 'index' %}" class="footer-logo text-center" style="text-align: center;">
+									<img src="{% static 'assets/img/LOGO FINLANDIYA.png' %}" alt="Logo">
+								</a>
+
+								<p>
+									Bu tizim O'zbekiston-Finlandiya pedagogika instituti uchun maxsus yaratilgan. Bu tizim institutdagi talabalar orasida o'zining yo'nalishi bo'yicha iqtidorli talabalarni saralsh maqsad qilingan.
+								</p>
+
+								<div class="footer-contact">
+									<div class="contact-details clearfix">
+										<i class="fa fa-map-marker"></i>
+										<p>
+											Samarqand sh., Spitamen shoh ko‘chasi, 166-uy
+										</p>
+									</div>
+
+									<div class="contact-details clearfix">
+										<i class="fa fa-phone"></i>
+										<p>
+											+998954108015
+										</p>
+									</div>
+
+									<div class="contact-details clearfix">
+										<i class="fa fa-envelope"></i>
+										<p>
+											devonxona@uzfi.uz
+										</p>
+									</div>
+								</div>
+								<!-- /.footer-address -->
+							</div>
+							<!-- /.footer-about -->
+						</div>
+						<!-- /.col-xl-3 col-lg-4 col-sm-6 -->
+
+						<div class="col-xl-3 col-lg-6 col-sm-6">
+							<div class="footer-blog-inner">
+								<h3 class="footer-title">Eng yaxshilar </h3>
+								<div class="footer-blog">
+									<div class="content">
+										<a href="{% url 'top_music' %}" class="meta">Top taronalar </a>
+									</div>
+								</div>
+								<div class="footer-blog">
+									<div class="content">
+										<a href="{% url 'top_video' %}" class="meta">Top kliplar </a>
+									</div>
+								</div>
+								<div class="footer-blog">
+									<div class="content">
+										<a href="{% url 'top_sher' %}" class="meta">Top sherlar </a>
+									</div>
+								</div>
+								<div class="footer-blog">
+									<div class="content">
+										<a href="{% url 'top_photo' %}" class="meta">Top rasmlar </a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xl-3 col-lg-6 col-sm-6">
+							<div class="footer-tags">
+								<h3 class="footer-title">Bo'limlar</h3>
+								<div class="tagcloud">
+									<a href="{% url 'new_music' %}">Musiqa</a>
+									<a href="{% url 'new_video' %}">Video</a>
+									<a href="{% url 'new_sher' %}">Sher</a>
+									<a href="{% url 'new_photo' %}">Rasm</a>
+									
+								</div>
+								<!-- /.tagcloud -->
+							</div>
+							<!-- /.footer-tags -->
+
+							<div class="footer-newsletter">
+								<!-- <h3 class="footer-title">Join our newsletter.</h3> -->
+
+								
+							</div>
+						</div>
+
+						<div class="col-xl-3 col-lg-6 col-sm-6">
+							<div class="widget-instagram">
+								<h3 class="footer-title">Instagram Image</h3>
+
+								<div class="instagram-feed">
+									<a href="#">
+										<img src="{% static 'media/instagram/music1.jpg' %}" alt="thumb">
+									</a>
+									<a href="#">
+										<img src="{% static 'media/instagram/music2.jpg' %}" alt="thumb">
+									</a>
+
+									<a href="#">
+										<img src="{% static 'media/instagram/video1.jpg' %}" alt="thumb">
+									</a>
+
+									<a href="#">
+										<img src="{% static 'media/instagram/video2.jpg' %}" alt="thumb">
+									</a>
+
+									<a href="#">
+										<img src="{% static 'media/instagram/writer1.jpg' %}" alt="thumb">
+									</a>
+
+									<a href="#">
+										<img src="{% static 'media/instagram/writer2.jpg' %}" alt="thumb">
+									</a>
+
+									<a href="#">
+										<img src="{% static 'media/instagram/painting1.jpg' %}" alt="thumb">
+									</a>
+
+									<a href="#">
+										<img src="{% static 'media/instagram/painting2.jpg' %}" alt="thumb">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="footer-social-link">
+				<li class="fb-bg"><a href="https://www.facebook.com/eduuzofficial" target="_blank">Facebook</a></li>
+				<li class="yotube-bg"><a href="https://www.youtube.com/@uzfi_education" target="_blank">Youtube</a></li>
+				<li class="tw-bg"><a href="https://twitter.com/eduuzofficial" target="_blank">Twitter</a></li>
+				<li class="pin-bg"><a href="https://www.instagram.com/edu.uz/" target="_blank">Instagram</a></li>
+			</ul>
+			<div class="copyright-text">
+				<div class="tim-container">
+					<div class="row">
+						<div class="col-sm-7 col-md-6">
+						</div>
+						<div class="col-sm-5 col-md-6">
+							<div class="design-author text-right">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<div class="backtotop">
+			<i class="fa fa-angle-up backtotop_btn"></i>
+		</div>
+
+
+	</div>
+	<!-- /#site -->
+	<!-- Dependency Scripts -->
+	<script src="{% static 'dependencies/jquery/jquery.min.js' %}"></script>
+	<script src="{% static 'dependencies/jquery-ui/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'dependencies/bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'dependencies/swiper/js/swiper.min.js' %}"></script>
+	<script src="{% static 'dependencies/swiperRunner/swiperRunner.min.js' %}"></script>
+	<script src="{% static 'dependencies/wow/js/wow.min.js' %}"></script>
+	<script src="{% static 'dependencies/jquery.countdown/jquery.countdown.min.js' %}"></script>
+	<script src="{% static 'dependencies/magnific-popup/js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'dependencies/jquery.spinner/js/jquery.spinner.js' %}"></script>
+	<script src="{% static 'dependencies/isotope-layout/isotope.pkgd.min.js' %}"></script>
+	<script src="{% static 'dependencies/masonry-layout/masonry.pkgd.min.js' %}"></script>
+	<script src="{% static 'dependencies/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+	<script src="{% static 'dependencies/slick-carousel/js/slick.min.js' %}"></script>
+	<script src="{% static 'assets/js/headroom.js' %}"></script>
+	<script src="{% static 'assets/js/soundmanager2.js' %}"></script>
+	<script src="{% static 'assets/js/mp3-player-button.js' %}"></script>
+	<script src="{% static 'assets/js/smoke.js' %}"></script>
+	<script src="{% static 'dependencies/FitText.js/js/jquery.fittext.js' %}"></script>
+	<script src="{% static 'dependencies/gmap3/js/gmap3.min.js' %}"></script>
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js'></script>
+	<script src="{% static 'dependencies/tilt.js/js/tilt.jquery.js' %}"></script>
+	<script src="{% static 'assets/js/parallax.min.js' %}"></script>
+
+	
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+	<!-- Player -->
+	<script src="{% static 'dependencies/jPlayer/js/jquery.jplayer.min.js' %}"></script>
+	<script src="{% static 'dependencies/jPlayer/js/jplayer.playlist.min.js' %}"></script>
+	<script src="{% static 'assets/js/myplaylist.js' %}" type="module"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!-- Remove It -->
+	<!-- <script src="{% static 'dependencies/colornip/colornip.min.js' %}"></script> -->
+
+	<!--Google map api -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsBrMPsyNtpwKXPPpG54XwJXnyobfMAIc"></script>
+
+	<!-- Site Scripts -->
+	<script src="{% static 'assets/js/app.js' %}"></script>
+	<script src="{% static 'assets/js/main.js' %}"></script>
+
+	<script src="{% static 'dist/js/script.js' %}"></script>
+
+	<script>
+		$(document).ready(function() {
+
+// Gets the video src from the data-src on each button
+
+var $videoSrc;  
+$('.video-btn').click(function() {
+    $videoSrc = $(this).data( "src" );
+});
+console.log($videoSrc);
+
+  
+  
+// when the modal is opened autoplay it  
+$('#myModal').on('shown.bs.modal', function (e) {
+    
+// set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+$("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0" ); 
+})
+  
+
+
+// stop playing the youtube video when I close the modal
+$('#myModal').on('hide.bs.modal', function (e) {
+    // a poor man's stop video
+    $("#video").attr('src',$videoSrc); 
+}) 
+});
+
+
+
+	</script>
+
+
+
+
+{% block playlistc %}
+
+
+{% endblock %}
+
+</body>
+
+</html>

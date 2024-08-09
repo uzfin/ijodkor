@@ -1,0 +1,446 @@
+{% extends 'frontend/main/base.html' %}
+{% block title %} O'zbekiston Finlandiya Pedagogika Instituti Yosh ijodkorlarni namoyon qilish portali {% endblock title %}
+{% block content %}	
+<section class="page-header" data-bg-image="/static/media/background/7.jpg">
+	<div class="tim-container">
+		<div class="page-header-title text-center">
+			<h3>Yangi Videolar</h3>
+			<h2></h2>
+		</div>
+
+		<div class="breadcrumbs">
+			<a href="#">Bosh sahifa</a>
+			<span>/</span>
+			<span>Yangi Videolar</span>
+		</div>
+
+	</div>
+</section>
+<style>
+	.profile {
+  margin: 20px 0;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 20px 0 10px 0;
+  background: #fff;
+}
+
+.profile-userpic img {
+  width: 50%;
+  height: 50%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.profile-usertitle-name {
+  color: #5a7391;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+
+
+
+
+
+.profile-usermenu ul li a {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.profile-usermenu ul li a i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.profile-usermenu ul li a:hover {
+  background-color: #fafcfd;
+  color: #5b9bd1;
+}
+
+
+.profile-content {
+  padding: 20px;
+  background: #fff;
+  min-height: 460px;
+}
+
+.portlet.bordered {
+    border-left: 2px solid #e6e9ec!important;
+}
+.portlet.light {
+    padding: 12px 20px 15px;
+    background-color: #fff;
+}
+.portlet.light.bordered {
+    border: 1px solid #e7ecf1!important;
+}
+.list-separated {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.profile-stat {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f4f7;
+}
+.profile-stat-title {
+    color: #7f90a4;
+    font-size: 25px;
+    text-align: center;
+}
+.uppercase {
+    text-transform: uppercase!important;
+}
+
+.profile-stat-text {
+    color: #5b9bd1;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+.profile-desc-title {
+    color: #7f90a4;
+    font-size: 17px;
+    font-weight: 600;
+}
+.profile-desc-text {
+    color: #7e8c9e;
+    font-size: 14px;
+}
+.margin-top-20 {
+    margin-top: 20px!important;
+}
+[class*=" fa-"]:not(.fa-stack), [class*=" glyphicon-"], [class*=" icon-"], [class^=fa-]:not(.fa-stack), [class^=glyphicon-], [class^=icon-] {
+    display: inline-block;
+    line-height: 14px;
+    -webkit-font-smoothing: antialiased;
+}
+.profile-desc-link i {
+    width: 22px;
+    font-size: 19px;
+    color: #abb6c4;
+    margin-right: 5px;
+}
+
+body {
+  background: #F1F3FA;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    --bs-table-accent-bg: #f1f3fa;
+    color: var(--bs-table-striped-color);
+}
+
+.table {
+    --bs-table-color: var(--bs-body-color);
+    --bs-table-bg: transparent;
+     --bs-table-border-color: black;
+}
+
+</style>	
+
+<div class="container">
+    <div class="row profile">
+		<div class="col-md-3">
+			<div class="profile-sidebar">
+				<div class="profile-userpic text-center">
+					<img src="{{user_picture.profil_pic.url}}" class="img-responsive rounded" alt="">
+				</div>
+
+				<div class="text-center mt-2">
+					<div class="profile-usertitle-name">
+						{{user_picture.first_name}} {{user_picture.last_name}}
+					</div>
+					<div class="profile-usertitle-job">
+						Iqtidorli
+					</div>
+				</div>
+
+				<div class="text-center">
+					<button type="button" class="btn btn-success btn-sm">Follow</button>
+					<button type="button" class="btn btn-danger btn-sm">Message</button>
+				</div>
+
+				<div class="profile-usermenu mt-2">
+					<ul class="list-group">
+						{% for i in artist_user.taland_category.all %}
+							<li class="list-group-item">
+								<a href="#{{i.name}}">
+									<i class="fa fa-list"></i>
+									{{i.name}}
+								</a>
+							</li>
+						{% endfor %}
+					  </ul>
+				</div>
+			   
+           		<div class="portlet light bordered">
+					<div class="row list-separated profile-stat">
+						<div class="col-md-4 col-sm-4 col-xs-6">
+							<div class="uppercase profile-stat-title"> 37 </div>
+							<div class="uppercase profile-stat-text"> Projects </div>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-6">
+							<div class="uppercase profile-stat-title"> 51 </div>
+							<div class="uppercase profile-stat-text"> Tasks </div>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-6">
+							<div class="uppercase profile-stat-title"> 61 </div>
+							<div class="uppercase profile-stat-text"> Uploads </div>
+						</div>
+					</div>
+					<div>
+						<h4 class="profile-desc-title">{{user_picture.first_name}} {{user_picture.last_name}} haqida</h4>
+						<!-- <span class="profile-desc-text"> . </span> -->
+						<div class="margin-top-20 profile-desc-link">
+							<i class="fa fa-globe"></i>
+							<a href="https://www.apollowebstudio.com">ijodkor.uzif.uz</a>
+						</div>
+						<div class="margin-top-20 profile-desc-link">
+							<i class="fa fa-twitter"></i>
+							<a href="https://www.twitter.com/jasondavisfl/">@uzfieducation</a>
+						</div>
+						<div class="margin-top-20 profile-desc-link">
+							<i class="fa fa-facebook"></i>
+							<a href="https://www.facebook.com/">@uzfieducation</a>
+						</div>
+					</div>
+				</div>                   
+			</div>
+		</div>
+		<div class="col-md-9">
+            <div class="profile-content">
+				<!-- She'r -->
+				{% if sher_user.count != 0 %}
+				<section id="music-tabs" class="section-padding">
+					<h3 id="She'r">She'r</h3>
+					<div class="container">
+						<table class="table table-striped">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">She'r nomi</th>
+								<th scope="col">She'r matni</th>
+							  </tr>
+							</thead>
+							<tbody>
+							 {% for sher in sher_user %}
+							  <tr>
+								<th scope="row">{{forloop.counter}}</th>
+								<td>{{sher.title}}</td>
+								<td style="cursor: pointer;" data-toggle="modal" data-target="#exampleModalfullysher{{sher.id}}"><span class="fa fa-pencil fa-1x text-primary"></span></td>
+							  </tr>
+							  <!-- View sher Fully -->
+
+							  <div class="modal fade" id="exampleModalfullysher{{sher.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil text-primary"></i> {{sher.title}}</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											<div class="col-md-1">
+			  
+											</div>
+											<div class="col-md-10">
+											<p>
+												{{sher.text|safe}}
+											</p>
+											</div>
+											<div class="col-md-1">
+			  
+											</div>
+										  </div>
+									
+									</div>
+									<div class="modal-footer" style="background-color: #007bff;">
+									</div>
+								</div>
+								</div>
+							</div>
+							<!-- End View Video Fully  -->
+							  {% endfor %}
+							
+							</tbody>
+						  </table>
+		
+					</div>
+				</section>
+				{% endif %}
+
+				<!-- Rasm -->
+				{% if rasm_user.count != 0 %}
+				<section id="music-tabs" class="section-padding">
+					<h3 id="Rasm">Rasm</h3>
+					<div class="container">
+						<table class="table table-striped">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Rasm nomi</th>
+								<th scope="col">Rasmni ko'rish</th>
+							  </tr>
+							</thead>
+							<tbody>
+							 {% for rasm in rasm_user %}
+							  <tr>
+								<th scope="row">{{forloop.counter}}</th>
+								<td>{{rasm.title}}</td>
+								<td style="cursor: pointer;" data-toggle="modal" data-target="#exampleModalfullyrasm{{rasm.id}}"><span class="fa fa-image fa-1x text-primary"></span></td>
+							  </tr>
+							  <!-- View Rasm Fully -->
+
+							  <div class="modal fade" id="exampleModalfullyrasm{{rasm.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-text text-primary"></i> {{rasm.title}}</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									</div>
+									<div class="modal-body p-lg-4">
+										<p class="text-center"><img src="{{ rasm.img.url }}" class="img-fluid rounded" alt="">
+											<div class="row">
+											  {% for rassom in rasm.image_set.all %}
+												<div class="col-md-6 col-6 mb-lg-2">
+												  <img src="{{ rassom.image.url }}" class="img-fluid rounded" alt="">
+												</div>
+											  {% endfor %}
+											</div>
+									
+									</div>
+									<div class="modal-footer" style="background-color: #007bff;">
+									</div>
+								</div>
+								</div>
+							</div>
+							<!-- End View Video Fully  -->
+							  {% endfor %}
+							
+							</tbody>
+						  </table>
+		
+					</div>
+				</section>
+				{% endif %}
+
+				<!-- Video -->
+				{% if video_user.count != 0 %}
+				<section id="music-tabs" class="section-padding">
+					<h3 id="Video">Video</h3>
+					<div class="container">
+						<table class="table table-striped">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Video nomi</th>
+								<th scope="col">Videoni ko'rish</th>
+							  </tr>
+							</thead>
+							<tbody>
+							 {% for video in video_user %}
+							  <tr>
+								<th scope="row">{{forloop.counter}}</th>
+								<td>{{video.title}}</td>
+								<td style="cursor: pointer;" data-toggle="modal" data-target="#exampleModalfully{{video.id}}"><span class="fa fa-video-camera fa-1x text-primary"></span></td>
+							  </tr>
+							  <!-- View Video Fully -->
+
+							  <div class="modal fade" id="exampleModalfully{{video.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-text text-primary"></i> {{video.title}}</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									</div>
+									<div class="modal-body">
+									  <div class="row">
+										<div class="col-md-1">
+		  
+										</div>
+										<div class="col-md-10">
+										  <video width="100%" controls>
+											  <source src="{{video.videofile.url}}" type="video/mp4">
+											  Your browser does not support HTML5 video.
+											</video>
+										</div>
+										<div class="col-md-1">
+		  
+										</div>
+									  </div>
+									
+									</div>
+									<div class="modal-footer" style="background-color: #007bff;">
+									</div>
+								</div>
+								</div>
+							</div>
+							<!-- End View Video Fully  -->
+							  {% endfor %}
+							
+							</tbody>
+						  </table>
+		
+					</div>
+				</section>
+				{% endif %}
+
+				{% if song_user.count != 0 %}
+				<section id="music-tabs" class="section-padding">
+					<h3 id="Qo'shiq">Qo'shiq</h3>
+					<div class="container">
+						<table class="table table-striped">
+							<thead>
+							  <tr>
+								<th scope="col">#</th>
+								<th scope="col">Qo'shiq</th>
+								<th scope="col">Eshitish</th>
+								<th scope="col">Yuklash</th>
+							  </tr>
+							</thead>
+							<tbody>
+							 {% for song in song_user %}
+							  <tr>
+								<th scope="row">{{forloop.counter}}</th>
+								<td>{{song.song_title}}</td>
+								<td><a href="{{song.audio_file.url}}" class="sm2_button sm2_paused"><i></i></a></td>
+								<td><a href="{{ song.audio_file.url }}" target="_blank" class="song-download"><i class="fa fa-download"></i></a></td>
+							  </tr>
+							  {% endfor %}
+							
+							</tbody>
+						  </table>
+		
+					</div>
+				</section>
+				{% endif %}
+
+            </div>
+		</div>
+	</div>
+</div>
+{% endblock content %}		
+
+
+
+		

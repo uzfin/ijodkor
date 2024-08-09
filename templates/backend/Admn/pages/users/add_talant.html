@@ -1,0 +1,101 @@
+{% extends 'backend/main/base.html' %}
+{% block title %} Add Talant {% endblock title %}
+{% block page_name %} Add talant {% endblock page_name %}
+
+{% block breadcrumb %} 
+<li class="breadcrumb-item"><a href="{% url 'admn_home' %}">Home</a></li>
+<li class="breadcrumb-item active">Add talant</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+        <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+<style>
+    .card {
+        box-shadow: none !important;
+        margin-bottom: 1rem;
+    }
+    .card {
+        border-top: 3px solid #007bff !important;
+    }
+</style>
+{% for message in messages %}
+  {% if message.tags == 'warning' %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var m = '{{ message }}';
+        swal('Oppss !', m, "info")
+    </script>
+  {% endif %}
+{% endfor %}
+<div class="col-md-12">
+    <div class="card card-primary" style="border-radius: 2px solid #007bff;">
+      <form method="post" onsubmit="return validateFormTalant()" enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token %}
+        <div class="card-body">
+
+          <div class="form-group">
+            <label>Ism</label>
+            <input type="text" class="form-control ism" id="ism" name="ism" placeholder="Ismingizni kiriting">
+          </div>
+
+          <div class="form-group">
+            <label>Familya</label>
+            <input type="text" class="form-control familya" id="familya" name="familya" placeholder="Familyangizni kiriting">
+          </div>
+
+
+           <!-- phone mask -->
+           <div class="form-group">
+            <label>Telefon raqam:</label>
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+              </div>
+              <input type="text" class="form-control phone" id="phone" name="tel_number" data-inputmask='"mask": "+998(99) 999-99-99"' data-mask>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Category</label>
+            <select id="multipleselect" name="category" placeholder="Categoriyalarni tanlang !!!" multiple>
+              {% for category in categories %}
+                <option value="{{category.id}}">{{category.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Login</label>
+            <input type="text" class="form-control login" id="login" name="login" placeholder="Login kiriting">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="parol" class="form-control parol" id="parol" placeholder="Password">
+          </div>
+          
+
+          <div class="mb-3">
+              <div class="mb-3" style="font-size: 14px;"><i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp; O'zingizni rasmingizni yuklang!</div>
+              <input type="file" id="file" name="rasm" class="form-control form-control-sm file" name="file" accept="image/png, image/jpeg">
+              <div class="form-text" style="font-size: 12px;">*Ruxsat berilgan rasm turlari: jpg - png</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </div>
+
+          
+      </form>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+    var multipleSelectButton = new Choices('#multipleselect', {
+    removeItemButton: true,
+    // maxItemCount:5,
+    });
+    });
+    </script>
+{% endblock content %}

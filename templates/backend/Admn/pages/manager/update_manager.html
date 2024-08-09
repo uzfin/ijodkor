@@ -1,0 +1,69 @@
+{% extends 'backend/main/base.html' %}
+{% block title %} Update Manager {% endblock title %}
+{% block page_name %} Update Manager | ID:#{{manager.id}}{% endblock page_name %}
+
+{% block breadcrumb %} 
+<li class="breadcrumb-item"><a href="{% url 'admn_home' %}">Home</a></li>
+<li class="breadcrumb-item"><a href="{% url 'view_manager' %}">View Manager</a></li>
+<li class="breadcrumb-item active">ID:#{{manager.id}}</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+<style>
+    .card {
+        box-shadow: none !important;
+        margin-bottom: 1rem;
+    }
+    .card {
+        border-top: 3px solid #007bff !important;
+    }
+</style>
+{% for message in messages %}
+  {% if message.tags == 'warning' %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var m = '{{ message }}';
+        swal('Oppss !', m, "info")
+    </script>
+  {% endif %}
+{% endfor %}
+<div class="col-md-12">
+    <div class="card card-primary" style="border-radius: 2px solid #007bff;">
+      <form method="post" action="/Admn/manager/update" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card-body">
+
+          <div class="form-group">
+            <label>Ism</label>
+            <input type="text" class="form-control" name="ism" placeholder="Ismingizni kiriting" value="{{manager.manager.first_name}}">
+            <input type="hidden" class="form-control" name="manager_id" value="{{manager.manager.id}}">
+          </div>
+
+          <div class="form-group">
+            <label>Familya</label>
+            <input type="text" class="form-control" name="familya" placeholder="Familyangizni kiriting" value="{{manager.manager.last_name}}">
+          </div>
+
+          <div class="form-group">
+            <label>Login</label>
+            <input type="text" class="form-control" name="login" placeholder="Login kiriting" value="{{manager.manager.username}}" readonly>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="parol" class="form-control" placeholder="Agar o'zgartirmoqchi bo'lsangiz o'zgartiring">
+          </div>
+
+          <div class="mb-3">
+              <div class="mb-3" style="font-size: 14px;"><i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp; Agar rasmni o'zgartirmoqchi bo'lsangiz rasm yuklang!</div>
+              <input type="file" id="file" name="rasm" class="form-control form-control-sm file" name="file" accept="image/png, image/jpeg">
+              <div class="form-text" style="font-size: 12px;">*Ruxsat berilgan rasm turlari: jpg - png</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
+        </div>
+
+          
+      </form>
+    </div>
+  </div>
+{% endblock content %}

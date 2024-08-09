@@ -1,0 +1,127 @@
+{% extends 'frontend/main/base.html' %}
+{% block title %} O'zbekiston Finlandiya Pedagogika Instituti Yosh ijodkorlarni namoyon qilish portali {% endblock title %}
+{% block content %}		
+
+		<section class="page-header" data-bg-image="/static/media/background/writer.jpg">
+			<div class="tim-container">
+				<div class="page-header-title text-center">
+					<h3>Eng mashhur sherlar</h3>
+					<h2></h2>
+				</div>
+				<div class="breadcrumbs">
+					<a href="#">Bosh sahifa</a>
+					<span>/</span>
+					<span>Eng mashhur sherlar</span>
+				</div>
+
+			</div>
+		</section>
+	
+        <section id="blog-grid" class="section-padding">
+			<div class="tim-container">
+				<div class="section-title text-center">
+					<h2>ENG YANGI <span>Sherlar</span></h2>
+					<p>
+						
+					</p>
+				</div>
+
+				<div class="row">
+					{% for sher in list_exams %}
+						<div class="col-xl-4 col-md-4 col-lg-6 col-sm-6">
+							<article class="blog-post-grid">
+								<div class="entry-content text_style">
+									<header class="entry-header">
+										<h4 class="alpha text-center"><a href="#">{{ sher.title }}</a></h4>
+									</header>
+									<p>{{ sher.text|truncatewords:50|safe }}</p>
+									<a href="#" class="read-btn"  data-toggle="modal" data-target="#exampleModalfully{{sher.id}}"> To'liq o'qish</a>
+								</div>
+								<aside class="entry-meta">
+									<span  class="comments">
+										<div class="like_dislike" id="like_dislike">
+											<div class="like" id="like_ajax_sher{{sher.id}}" val{{sher.id}}="{{sher.id}}" data-status="inactive">
+											<i id="like__icon" class="fa fa-thumbs-up" style="margin-left: 0px; color: transparent!important;
+											-webkit-text-stroke: 1px black;-webkit-text-fill-color: white;"></i>
+											<span class="number" id="number_id{{sher.id}}">{{sher.total_likes}}</span>
+											</div>
+											<span class="divider"></span>
+											<div class="dislike" id="dislike" data-status="inactive">
+											<i id="dislike__icon" class="fa fa-thumbs-down"  style="margin-left: 0px; color: transparent!important;
+											-webkit-text-stroke: 1px black;-webkit-text-fill-color: white;"></i>
+											</div>
+										</div>
+									</span>
+								</aside>
+							</article>
+						</div>	
+						<div class="modal fade" id="exampleModalfully{{sher.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<h5 class="modal-title" style="color: #007bff;" id="exampleModalLabel"><span class="fa fa-pencil fa-1x"></span> {{ sher.title }}</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col-md-3 col-12">
+										</div>
+										<div class="col-md-6 col-12">
+											<p>{{sher.text|safe}}</p>
+										</div>
+										<div class="col-md-3 col-12">
+										</div>
+									</div>
+										
+								</div>
+								<div class="modal-footer" style="background-color: #007bff;">
+								</div>
+							</div>
+							</div>
+						</div>
+						<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+						<script>
+						$(document).ready(function () {
+							$('#like_ajax_sher{{sher.id}}').click(function() {
+								var value = $(this).attr('val{{sher.id}}');
+								$.ajax({
+									url: '{% url "ajax_sher" %}',
+									type: 'get',
+									data: {
+										button_text: value
+									},
+									success: function(response) {
+										$("#number_id{{sher.id}}").text(response.qiymat);
+									}
+								});
+							});
+						})
+						</script>
+					{% endfor %}
+				</div>
+			
+				<nav class="posts-navigation text-center clearfix">
+					<ul>
+						{% if page_obj.has_previous %}
+							<li><a href="?page={{ page_obj.previous_page_number }}">Oldingi</a></li>
+						{% endif %}
+						
+						{% for item in page_obj.paginator.page_range %}
+						<li><a href="?page={{ item }}">{{ item }}</a></li>
+					  {% endfor %}
+						
+						{% if page_obj.has_next %}
+							<li><a href="?page={{ page_obj.next_page_number }}">Keyingi</a></li>
+						{% endif %}
+						
+					</ul>
+					<span>{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+				</nav>
+			</div>
+		</section>
+
+    
+    
+			{% endblock content %}		

@@ -1,0 +1,546 @@
+
+{% extends 'frontend/main/base.html' %}
+{% block title %} O'zbekiston Finlandiya Pedagogika Instituti Yosh ijodkorlarni namoyon qilish portali {% endblock title %}
+{% block content %}		
+
+
+		
+		<!--============================-->
+		<!--=        	Banner         =-->
+		<!--============================-->
+		<section id="banner-one">
+			<div class="swiper-container banner-slider-one" data-swiper-config='{"loop": true, "effect": "slide", "prevButton":"#banner-nav-prev", "nextButton": "#banner-nav-next", "speed": 700, "autoplay": 5000, "grabCursor": true, "paginationClickable": true}'>
+
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" data-bg-image="/static/media/background/222.png" data-parallax="image">
+						<div class="slider-content" data-animate="fadeIn">
+							<h3 data-animate="fadeInUp"  style="background-color:rgba(224, 15, 25, 0.438);border-radius: 15px;padding: 20px;"> Musiqa, Video, Rassomchilik ishlari, <br> Sheʼriyat barcha ijod yo‘nalishlarini bir yerga jamlaymiz </h3>
+							<h2 data-animate="fadeInUp" data-delay="0.5s" style="background-color:rgba(224, 15, 25, 0.438);border-radius: 15px;padding: 20px;">Ijodkor
+						</div>
+					</div>
+					<div class="swiper-slide" data-bg-image="/static/media/background/2.png" data-parallax="image">
+						<div class="slider-content" data-animate="fadeIn">
+							<h3 data-animate="fadeInUp"  style="background-color:rgba(224, 15, 25, 0.438);border-radius: 15px;padding: 20px;"> Musiqa, Video, Rassomchilik ishlari, <br> Sheʼriyat barcha ijod yo‘nalishlarini bir yerga jamlaymiz </h3>
+							<h2 data-animate="fadeInUp" data-delay="0.5s" style="background-color:rgba(224, 15, 25, 0.438);border-radius: 15px;padding: 20px;">Ijodkor
+						</div>
+					</div>
+				</div>
+				<!-- Swiper Nav Prev -->
+				<div id="banner-nav-prev" class="slider-nav-prev">
+					<i class="fa fa-angle-left"></i>
+				</div>
+				<!-- Swiper Nav Next -->
+				<div id="banner-nav-next" class="slider-nav-next">
+					<i class="fa fa-angle-right"></i>
+				</div>
+
+				<div class="header_player">
+					<div class="tim-container ">
+						<!-- Audio Player -->
+						<div class="player-container">
+							<div class="current-tracks">
+								<div id="main_player" class="jp-jplayer">
+
+								</div>
+								<div id="nowPlaying">
+									<h3 class="track-name"></h3>
+									<span class="artist-name"></span>
+								</div>
+								<!-- #nowPlaying -->
+							</div>
+							<!-- /.current-tracks -->
+
+							<div id="header_player" class="jp-audio" role="application" aria-label="media player">
+								<div class="jp-type-playlist clearfix">
+									<div class="jp-gui jp-interface">
+										<div class="jp-controls">
+											<button class="jp-previous" tabindex="0"><i class="fa fa-backward"></i></button>
+											<button class="jp-play" tabindex="0"><i class="fa fa-play"></i></button>
+											<button class="jp-next" tabindex="0"><i class="fa fa-forward"></i></button>
+										</div>
+										<!-- Display the track inside player -->
+
+										<div class="jp-progress">
+											<div class="jp-seek-bar">
+												<div class="jp-play-bar"></div>
+											</div>
+										</div>
+
+										<div class="jp-duration" role="timer" aria-label="duration"></div>
+
+										<div class="vel-wrap">
+											<button class="jp-mute" tabindex="0"><i class="fa fa-volume-up"></i></button>
+
+											<div class="jp-volume-bar">
+												<div class="jp-volume-bar-value"></div>
+											</div>
+
+										</div>
+										<!-- /.vel-wrap -->
+
+										<button id="playlist-toggle" class=""><i class="fa fa-list"></i></button>
+
+										<!-- Playlist -->
+										<div class="jp-playlist">
+											<ul>
+												<li>
+
+													
+
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</section>
+<!-- ================================================== SONGS ================================================== -->
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="section-title text-center mt-5">
+				<h2>Eng <span>yangi</span>taronalar</h2>
+			</div>
+			<div class="music-playlist-one">
+				<ul class="hit-plalist">
+					{% for song in songs_new %}
+						<li>
+							<a href="{{ song.audio_file.url }}" class="sm2_button"><i></i></a>
+							<span class="song-name">{{ song.song_title }}</span>
+							<span class="dur">04.12</span>
+							<a href="{{ song.audio_file.url }}" target="_blank" class="song-download"><i class="fa fa-download"></i></a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="section-title text-center mt-5">
+				<h2>Eng <span>mashhur</span>taronala sdakfkjabsdjfbdjksr</h2>
+			</div>
+			<div class="music-playlist-one">
+				<ul class="hit-plalist">
+					{% for song in songs_top %}
+						<li>
+							<a href="{{ song.audio_file.url }}" class="sm2_button"><i></i></a>
+							<span class="song-name">{{ song.song_title }}</span>
+							<span class="dur">04.12</span>
+							<a href="{{ song.audio_file.url }}" target="_blank" class="song-download"><i class="fa fa-download"></i></a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ================================================== VIDEOLAR ================================================== -->
+<section id="tranding-album">
+	<div class="tim-container">
+		<div class="section-title text-center">
+			<h2>Eng yangi  <span>videolar</span></h2>
+		</div>
+		<div class="album-boxs">
+			<div class="row">
+				{% for video in videos %}
+					<div class="col-lg-4 col-md-6 col-6 col-full-width">
+						<div class="album-box">
+							<div class="box-thumb">
+								<video width="100%" height="300" controls>
+									<source src="{{ video.videofile.url }}" type="video/mp4">
+								</video>
+							</div>
+							<h5 class="album-name text-center" >{{ video.title|capfirst }}</h5>
+							<hr>
+							<aside class="entry-meta">
+								<ul class="aa">
+									<li>
+										<a href="{% url 'profile_user' video.user.artist.id %}"><h6 class="album-name text-center" >{{video.user}}</h6></a>
+									</li>
+									<li style="float: right;">
+										<div class="like_dislike" id="like_dislike">
+											<div class="like" id="like_ajax_video{{video.id}}" val{{video.id}}="{{video.id}}" onclick="liked()" data-status="inactive">
+												<i id="like__icon" class="fa fa-thumbs-up" style="margin-left: 0px;"></i>
+												<span class="number" id="number_video{{video.id}}">{{video.total_likes}}</span>
+											</div>
+											<span class="divider"></span>
+											<div class="dislike" id="dislike" onclick="disliked()" data-status="inactive">
+												<i id="dislike__icon" class="fa fa-thumbs-down"></i>
+											</div>
+										</div>
+									</li>
+									<i class="bi bi-hand-thumbs-up"></i>
+								</ul>
+							</aside>	
+						</div>
+					</div>
+					
+					<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+					<script>
+					$(document).ready(function () {
+						$('#like_ajax_video{{video.id}}').click(function() {
+							var value = $(this).attr('val{{video.id}}');
+							$.ajax({
+								url: '{% url "ajax_video" %}',
+								type: 'get',
+								data: {
+									button_text: value
+								},
+								success: function(response) {
+									$("#number_video{{video.id}}").text(response.qiymat);
+								}
+							});
+						});
+					})
+					</script>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="section-title text-center">
+			<a href="{% url 'new_video' %}" class="tim-btn">Barchasini ko'rish... </a>
+		</div>
+	</div>
+</section>
+<!-- -=-=-=-=-=--=-==-=-=-=--=-=-=-=-=-=-=---=-=-==--=-=-=-=-==-=-=-=--==--=--=-==-=-=--=-=--=-=-=-==--=-=--=--=-=- -->
+
+<!-- ================================================== SHE'RLAR ================================================== -->
+<section id="blog-grid" class="section-padding">
+	<div class="tim-container">
+		<div class="section-title text-center">
+			<h2>ENG YANGI <span>Sherlar</span></h2>
+		</div>
+		<div class="row">
+			{% for sher in sherlar %}
+				<div class="col-xl-4 col-md-4 col-lg-6 col-sm-6">
+					<article class="blog-post-grid">
+						<div class="entry-content text_style">
+							<header class="entry-header">
+								<h4 class="alpha text-center"><a href="#">{{ sher.title }}</a></h4>
+							</header>
+							<p>{{ sher.text|truncatewords:50|safe }}</p>
+							<a href="#" class="read-btn"  data-toggle="modal" data-target="#exampleModalfully{{sher.id}}"> To'liq o'qish</a>
+						</div>
+						<aside class="entry-meta">
+							<a href=""><b>{{sher.user}}</b></a>
+							<span  class="comments">
+								<div class="like_dislike" id="like_dislike">
+									<div class="like" id="like_ajax_sher{{sher.id}}" val{{sher.id}}="{{sher.id}}" data-status="inactive">
+									<i id="like__icon" class="fa fa-thumbs-up" style="margin-left: 0px; color: transparent!important;
+									-webkit-text-stroke: 1px black;-webkit-text-fill-color: white;"></i>
+									<span class="number" id="number_id{{sher.id}}">{{sher.total_likes}}</span>
+									</div>
+									<span class="divider"></span>
+									<div class="dislike" id="dislike" data-status="inactive">
+									<i id="dislike__icon" class="fa fa-thumbs-down"  style="margin-left: 0px; color: transparent!important;
+									-webkit-text-stroke: 1px black;-webkit-text-fill-color: white;"></i>
+									</div>
+								</div>
+							</span>
+						</aside>
+					</article>
+				</div>	
+				<div class="modal fade" id="exampleModalfully{{sher.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" style="color: #007bff;" id="exampleModalLabel"><span class="fa fa-pencil fa-1x"></span> {{ sher.title }}</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-3 col-12">
+								</div>
+								<div class="col-md-6 col-12">
+									<p>{{sher.text|safe}}</p>
+								</div>
+								<div class="col-md-3 col-12">
+								</div>
+							</div>
+								
+						</div>
+						<div class="modal-footer" style="background-color: #007bff;">
+						</div>
+					</div>
+					</div>
+				</div>
+				<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+				<script>
+				$(document).ready(function () {
+					$('#like_ajax_sher{{sher.id}}').click(function() {
+						var value = $(this).attr('val{{sher.id}}');
+						$.ajax({
+							url: '',
+							type: 'get',
+							data: {
+								button_text: value
+							},
+							success: function(response) {
+								$("#number_id{{sher.id}}").text(response.qiymat);
+							}
+						});
+					});
+				})
+				</script>
+			{% endfor %}
+		</div>
+		<div class="section-title text-center mt-3">
+			<a href="{% url 'new_sher' %}" class="tim-btn">Barchasini ko'rish... </a>
+		</div> 
+	</div> 
+</section>
+<!-- -=-=-=-=-=--=-==-=-=-=--=-=-=-=-=-=-=---=-=-==--=-=-=-=-==-=-=-=--==--=--=-==-=-=--=-=--=-=-=-==--=-=--=--=-=- -->
+
+<style>
+	.btn_myself {
+		border: 1px solid white;
+		border-radius: 20px;
+		color: white;
+		padding: 3px 10px;
+		font-size: 16px;
+		cursor: pointer;
+
+	}
+	.btn_myself:hover {
+		color: red;
+		background-color: white;
+	}
+</style>
+<!-- ================================================== SARALASH ================================================== -->
+<section id="ticket" class="parallax" data-speed="0.-3" data-height="700px" data-bg-image="/static/media/background/2.png">
+	<div class="tim-container">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="live-ticket p-4" style="background-color:rgba(224, 15, 25, 0.438);border-radius: 15px;" >
+					<h2>
+						Biz eng Yaxshilarni<br>  qidiryapmiz shoshiling
+					</h2>
+					<h3 style="color:white">Eng yaxshilar saralanmoqda ulgurib qoling <br> O‘zbekiston Finlyandiya Pedagogika Institutida <br> <b>Musiqa, Video, Ijod namunalarini, Sherlar</b> bo‘yicha eng yaxshilarni aniqlamoqda shoshiling</3>
+					<div class="live-ticket-count">
+						<div class="countdown" data-count-year="{{counter.year}}" data-count-month="{{counter.month}}" data-count-day="{{counter.day}}">
+						</div>
+					</div>
+					<a href="{% url 'comp_video' %}" class="btn_myself">Video montajer</a>
+					<a href="{% url 'comp_rassom' %}" class="btn_myself">Rassomlik</a>
+					<a href="{% url 'comp_song' %}" class="btn_myself">Musiqa</a>
+					<a href="{% url 'comp_sher' %}" class="btn_myself">Sher</a>
+				</div>
+				
+				
+
+
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- -=-=-=-=-=--=-==-=-=-=--=-=-=-=-=-=-=---=-=-==--=-=-=-=-==-=-=-=--==--=--=-==-=-=--=-=--=-=-=-==--=-=--=--=-=- -->
+
+<!-- ================================================== Rasmlar ================================================== -->
+		<section id="product" class="section-padding site-main">
+			<div class="tim-container">
+				<div class="section-title text-center">
+					<h2>Eng yangi <span>Rasmlar</span></h2>
+				</div>
+				<div class="woocommerce columns-4">
+					<ul class="products product-two wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="0.7s">
+						{% for rasm in rasmlar %}
+							<li class="product clearfix">
+								<div class="product-thumb">
+									<a href="#"><img src="{{ rasm.img.url }}" height="230" class="attachment-shop_catalog" alt="Product"></a>
+									<a href="#" class="button add_to_cart_button ajax_add_to_cart"  data-toggle="modal" data-target="#exampleModalfully{{rasm.id}}">To'liq ko'rish</a>
+								</div>
+								<h5 class="album-name text-center" >{{rasm.title}} </h5>
+								<hr>
+								<span class="price">
+									<span class="woocommerce-Price-amount amount ">
+										<div class="like_dislike" id="like_dislike">
+											<div class="like" id="like_ajax_rasm{{rasm.id}}" val{{rasm.id}}="{{rasm.id}}" data-status="inactive">
+											<i id="like__icon" class="fa fa-thumbs-up" style="margin-left: 0px;"></i>
+											<span class="number" id="number_rasm{{rasm.id}}">{{rasm.total_likes}}</span>
+											</div>
+											<span class="divider"></span>
+											<div class="dislike" id="dislike" onclick="disliked()" data-status="inactive">
+											<i id="dislike__icon" class="fa fa-thumbs-down"></i>
+											</div>
+										</div>
+									</span>
+								</span>
+							</li>
+
+							<div class="modal fade" id="exampleModalfully{{rasm.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									<h5 class="modal-title" style="color: #007bff;" id="exampleModalLabel"><span class="fa fa-image fa-1x"></span> {{ rasm.title }}ning barcha rasmlari</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									</div>
+									<div class="modal-body p-4">
+									  <p class="text-center"><img src="{{ rasm.img.url }}" class="img-fluid rounded" alt="">
+										<div class="row">
+										  {% for picture in rasm.image_set.all %}
+											<div class="col-md-6 col-6 mb-lg-2">
+											  <img src="{{ picture.image.url }}" class="img-fluid rounded" alt="">
+											</div>
+										  {% endfor %}
+										</div>
+									  </p>
+									</div>
+									<div class="modal-footer" style="background-color: #007bff;">
+									</div>
+								</div>
+								</div>
+							</div>
+							<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+							<script>
+							$(document).ready(function () {
+								$('#like_ajax_rasm{{rasm.id}}').click(function() {
+									var value = $(this).attr('val{{rasm.id}}');
+									$.ajax({
+										url: '{% url "ajax_rasm" %}',
+										type: 'get',
+										data: {
+											button_text: value
+										},
+										success: function(response) {
+											$("#number_rasm{{rasm.id}}").text(response.qiymat);
+										}
+									});
+								});
+							})
+							</script>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="section-title text-center mt-3">
+					<a href="{% url 'new_photo' %}" class="tim-btn">Barchasini ko'rish... </a>
+				</div> 
+			</div>
+		</section>
+		
+		<hr>
+		<!-- -=-=-=-=-=--=-==-=-=-=--=-=-=-=-=-=-=---=-=-==--=-=-=-=-==-=-=-=--==--=--=-==-=-=--=-=--=-=-=-==--=-=--=--=-=- -->
+
+<!-- ================================================== Carusel ================================================== -->
+		<section id="logo-carousel">
+			<div class="tim-container">
+				<div class="swiper-container tim-logo-carousel" data-swiper-config='{"loop": true, "speed": 700, "spaceBetween": 50, "autoplay": 3000, "pagination":"#brand-swiper-pagination", "slidesPerView": 5, "grabCursor": true, "paginationClickable": true, "breakpoints": { "1024": { "slidesPerView": 4 }, "768": { "slidesPerView": 3 }, "500": { "slidesPerView": 2 }}}'>
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="brand-logo">
+								<img src="https://uzfi.uz/frontend/web/arguments/dr_sl_img/img624d10dbed106.png" alt="Brand Logo">
+							</div>
+						</div>
+
+						<div class="swiper-slide">
+							<div class="brand-logo">
+								<img src="https://uzfi.uz/frontend/web/arguments/dr_sl_img/img61a46ed645861.png" alt="Brand Logo">
+							</div>
+						</div>
+
+						<div class="swiper-slide">
+							<div class="brand-logo">
+								<img src="https://uzfi.uz/frontend/web/arguments/dr_sl_img/img61a859a98376b.png" alt="Brand Logo">
+							</div>
+						</div>
+
+						<div class="swiper-slide">
+							<div class="brand-logo">
+								<img src="https://uzfi.uz/frontend/web/arguments/dr_sl_img/img61a46f0586149.png" alt="Brand Logo">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="brand-logo">
+								<img src="https://uzfi.uz/frontend/web/arguments/dr_sl_img/img61a46efa6b397.png" alt="Brand Logo">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="brand-logo">
+								<img src="https://uzfi.uz/frontend/web/arguments/dr_sl_img/img61a46ee39af6e.png" alt="Brand Logo">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.tim-container -->
+		</section>
+		<!-- /#logo-carousel -->
+
+
+		
+
+		{% endblock content %}	
+		
+		
+		{% block playlistc %}
+
+		<script>
+			
+			jQuery(document).ready(function($) { 
+					
+			const songs = [];
+			{% for i in songs_new %}
+				songs.push({
+					title: "{{ i.song_title }}",
+					artist: "{{ i.user }}",
+					mp3: "{{ i.audio_file.url }}",
+					// poster: "media/audio/07.jpg"
+				});
+			{% endfor %}
+			console.log(songs)
+		
+		
+				/* Banner Player */
+		$('#header_player').each(function() {
+		var myPlaylist = new jPlayerPlaylist({
+		jPlayer: "#main_player",
+		cssSelectorAncestor: "#header_player"
+		}, 
+		songs,
+		{
+		playlistOptions: {
+		enableRemoveControls: true,
+		html: '.play',
+		// autoPlay: true,
+		},
+		swfPath: "dependencies/jPlayer/js",
+		supplied: "oga, mp3",
+		wmode: "window",
+		useStateClassSkin: true,
+		toggleDuration: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		displayTime: 'slow',
+		});
+		
+		
+		
+		// Show The Current Track !!
+		$("#main_player").on(
+		$.jPlayer.event.ready + ' ' + $.jPlayer.event.play,
+		function(event) {
+		var current = myPlaylist.current;
+		var playlist = myPlaylist.playlist;
+		$.each(playlist, function(index, obj) {
+		  if (index == current) {
+			$("#nowPlaying .track-name").html(obj.title);
+			$("#nowPlaying .artist-name").html(obj.artist);
+		  }
+		});
+		});
+		});
+			})
+		</script>
+
+		{% endblock %}

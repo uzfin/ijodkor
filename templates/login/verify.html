@@ -1,0 +1,67 @@
+{% extends 'frontend/main/base.html' %}
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+
+<section class="page-header" data-bg-image="/static/media/background/7.jpg">
+  <div class="tim-container">
+    <div class="page-header-title text-center">
+      <h3>Biz bilan </h3>
+      <h2>Bog'laning</h2>
+    </div>
+
+    <div class="breadcrumbs">
+      <a href="#">Bosh sahifa</a>
+      <span>/</span>
+      <span>Bog'lanish</span>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="contuct-bottom section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="con-bottom-inner">
+          <h4>Tasdiqlash kodi</h4>
+          <p>
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script>
+                    var m = '{{ message }}';
+                    swal('Xato !', m, "error")
+                </script>
+                {% endif %}
+            {% endfor %}
+          </p>
+          
+      <form method="post" action="">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="code" placeholder="Tasdiqlash kodini kiriting" name="code">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fa fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+        </div>
+      </form>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}

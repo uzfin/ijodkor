@@ -1,0 +1,351 @@
+{% load static %}
+{% load active_link_tags %}
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="{% static 'dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        {% if request.user.user_type == "ADMIN" %}
+        <!-- ================================== ADMIN =================================== -->
+          <li class="nav-item">
+            <a href="{% url 'admn_home' %}" class="nav-link {% active_link 'admn_home' %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Bosh sahifa
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'category' %}" class="nav-link {% active_link 'category' %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Categoriyalar
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link {% active_link 'add_talant' %} {% active_link 'view_talant' %}">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Talant
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'add_talant' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Talant</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'view_talant' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Talant</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link {% active_link 'add_manager' %} {% active_link 'view_manager' %}">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Manager
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'add_manager' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Manager</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'view_manager' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Manager</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="{% url 'sher_list_A' %}" class="nav-link {% active_link 'sher_list_A' %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                She'rlar ro'yxati
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{% url 'list_song_A' %}" class="nav-link {% active_link 'list_song_A' %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Qo'shiqlar ro'yxati
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'list_video_A' %}" class="nav-link {% active_link 'list_video_A' %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Videolar ro'yxati
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'list_rassoms_A' %}" class="nav-link {% active_link 'list_rassoms_A' %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Rassomlar ro'yxati
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Archive
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'archive_video_view' %}" class="nav-link {% active_link 'archive_video_view' %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Video</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'archive_sher_view' %}" class="nav-link {% active_link 'archive_sher_view' %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>She'r</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'archive_song_view' %}" class="nav-link {% active_link 'archive_song_view' %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Musica</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'archive_rassom_view' %}" class="nav-link {% active_link 'archive_rassom_view' %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Rassom</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <!-- =============================== END ADMIN ===================================== -->
+        {% elif request.user.user_type == "MANAGER" %}
+
+        <li class="nav-item">
+          <a href="{% url 'manager_home' %}" class="nav-link {% active_link 'manager_home' %}">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Bosh sahifa
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{% url 'artist_lists' %}" class="nav-link {% active_link 'artist_lists' %}">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Artistlar ro'yxati
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{% url 'view_sher_manager' %}" class="nav-link {% active_link 'view_sher_manager' %}">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              She'rlar ro'yxati
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a href="{% url 'list_song_manager' %}" class="nav-link {% active_link 'list_song_manager' %}">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Musicalar ro'yxati
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{% url 'list_video_manager' %}" class="nav-link {% active_link 'list_video_manager' %}">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Videolar ro'yxati
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{% url 'list_rassoms_manager' %}" class="nav-link {% active_link 'list_rassoms_manager' %}">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Rasmlar ro'yxati
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li>
+       
+        
+
+        
+        {% else %}
+        <!-- =============================== Talant ======================================== -->
+        <!-- <p>{{request.user.artists.taland_category}}</p> -->
+       
+          <li class="nav-item">
+            <a href="{% url 'talant_home' %}" class="nav-link {% active_link 'admn_home' %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Bosh sahifa
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          {% for i in request.user.artists.taland_category.all %}
+            {% if i.name == "She'r"%}
+              <li class="nav-item">
+                <a href="#" class="nav-link {% active_link 'add_sher' %} {% active_link 'view_sher' %}">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p>
+                    Sher
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'add_sher' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Sher</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'view_sher' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Sher</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            {% elif i.name == "Qo'shiq" %}
+              <li class="nav-item">
+                <a href="#" class="nav-link {% active_link 'add_song' %}  {% active_link 'list_song' %}">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p>
+                    Song
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'add_song' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Song</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'list_song' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Song</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            {% elif i.name == "Rasm" %}
+              <li class="nav-item">
+                <a href="#" class="nav-link {% active_link 'create_rassom' %}  {% active_link 'list_rassoms' %}">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p>
+                    Rassom
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'create_rassom' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Rassom</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'list_rassoms' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Rassom</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            {% elif i.name == "Video" %}
+              <li class="nav-item">
+                <a href="#" class="nav-link {% active_link 'add_video' %}  {% active_link 'list_video' %}">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p>
+                    Videos
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'add_video' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Video</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'list_video' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Video</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            {% endif %}
+          {% endfor %}
+          
+          
+          
+
+          
+        <!-- ================================= END TALANT ================================================= -->
+        {% endif %}
+
+
+       
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>

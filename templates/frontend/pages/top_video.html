@@ -1,0 +1,109 @@
+{% extends 'frontend/main/base.html' %}
+{% block title %} O'zbekiston Finlandiya Pedagogika Instituti Yosh ijodkorlarni namoyon qilish portali {% endblock title %}
+{% block content %}		
+
+		<section class="page-header" data-bg-image="/static/media/background/video.jpg">
+			<div class="tim-container">
+				<div class="page-header-title text-center">
+					<h3>Top Videolar</h3>
+					<h2></h2>
+				</div>
+
+				<div class="breadcrumbs">
+					<a href="#">Bosh sahifa</a>
+					<span>/</span>
+					<span>Top Videolar</span>
+				</div>
+
+			</div>
+		</section>
+
+    
+        <section id="tranding-album">
+			<div class="tim-container">
+
+				<div class="section-title text-center">
+					<h2>Top  <span>videolar</span></h2>
+				</div>
+				
+
+				<div class="album-boxs">
+
+					<div class="row">
+						{% for video in list_exams %}
+							<div class="col-lg-4 col-md-6 col-6 col-full-width">
+								<div class="album-box">
+									<div class="box-thumb">
+										<video width="100%" height="300" controls>
+											<source src="{{ video.videofile.url }}" type="video/mp4">
+										</video>
+									</div>
+									<h5 class="album-name text-center" >{{ video.title|capfirst }}</h5>
+									<hr>
+									<aside class="entry-meta">
+										<ul class="aa">
+											<li>
+												<a href="#"><h6 class="album-name text-center" >{{video.user}}</h6></a>
+											</li>
+											<li style="float: right;">
+												<div class="like_dislike" id="like_dislike">
+													<div class="like" id="like_ajax_video{{video.id}}" val{{video.id}}="{{video.id}}" onclick="liked()" data-status="inactive">
+														<i id="like__icon" class="fa fa-thumbs-up" style="margin-left: 0px;"></i>
+														<span class="number" id="number_video{{video.id}}">{{video.total_likes}}</span>
+													</div>
+													<span class="divider"></span>
+													<div class="dislike" id="dislike" onclick="disliked()" data-status="inactive">
+														<i id="dislike__icon" class="fa fa-thumbs-down"></i>
+													</div>
+												</div>
+											</li>
+											<i class="bi bi-hand-thumbs-up"></i>
+										</ul>
+									</aside>	
+								</div>
+							</div>
+							
+							<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+							<script>
+							$(document).ready(function () {
+								$('#like_ajax_video{{video.id}}').click(function() {
+									var value = $(this).attr('val{{video.id}}');
+									$.ajax({
+										url: '{% url "ajax_video" %}',
+										type: 'get',
+										data: {
+											button_text: value
+										},
+										success: function(response) {
+											$("#number_video{{video.id}}").text(response.qiymat);
+										}
+									});
+								});
+							})
+							</script>
+						{% endfor %}
+					</div>
+				</div>
+				<nav class="posts-navigation text-center clearfix">
+					<ul>
+						{% if page_obj.has_previous %}
+							<li><a href="?page={{ page_obj.previous_page_number }}">Oldingi</a></li>
+						{% endif %}
+						
+						{% for item in page_obj.paginator.page_range %}
+						<li><a href="?page={{ item }}">{{ item }}</a></li>
+					  {% endfor %}
+						
+						{% if page_obj.has_next %}
+							<li><a href="?page={{ page_obj.next_page_number }}">Keyingi</a></li>
+						{% endif %}
+						
+					</ul>
+					<span>{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+				</nav>
+			</div>
+		</section>
+	
+
+
+		{% endblock content %}		

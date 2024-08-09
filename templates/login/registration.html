@@ -1,0 +1,140 @@
+{% extends 'frontend/main/base.html' %}
+{% block title %} Login {% endblock title %}
+{% load static %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+
+
+<section class="page-header" data-bg-image="/static/media/background/7.jpg">
+  <div class="tim-container">
+    <div class="page-header-title text-center">
+      <h3>Biz bilan </h3>
+      <h2>Bog'laning</h2>
+    </div>
+
+    <div class="breadcrumbs">
+      <a href="#">Bosh sahifa</a>
+      <span>/</span>
+      <span>Bog'lanish</span>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="contuct-bottom section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="con-bottom-inner">
+          <h4>Registration</h4>
+          <p>
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script>
+                    var m = '{{ message }}';
+                    swal('Xato !', m, "error")
+                </script>
+                {% endif %}
+
+                {% if message.tags == 'warning' %}
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script>
+                    var m = '{{ message }}';
+                    swal('Xato !', m, "info")
+                </script>
+                {% endif %}
+            {% endfor %}
+          </p>
+          
+      <form method="post" action="/registration/" onsubmit="return validateFormTalant()"  enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control ism" id="ism" placeholder="Ismingizni kiriting" name="ism" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fa fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control familya" id="familya" placeholder="Familyangizni kiriting" name="familya" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fa fa-lock"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="text" class="form-control phone" id="phone" name="tel" data-inputmask='"mask": "+998(99) 999-99-99"' data-mask>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-phone"></span>
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <select id="multipleselect" name="category" placeholder="Categoriyalarni tanlang !!!" multiple>
+            {% for category in categories %}
+              <option value="{{category.id}}">{{category.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control login" id="login" placeholder="Login" name="login" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control password" id="password" placeholder="Password" name="password" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-lock"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="mb-3" style="font-size: 14px;"><i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp; O'zingizni rasmingizni yuklang!</div>
+            <input type="file" id="file" class="form-control form-control-sm file" name="file" accept="image/png, image/jpeg">
+            <div class="form-text" style="font-size: 12px;">*Ruxsat berilgan rasm turlari: jpg - png</div>
+          </div>
+        <div class="row">
+      
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+        </div>
+      </form>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+      var multipleSelectButton = new Choices('#multipleselect', {
+      removeItemButton: true,
+      // maxItemCount:5,
+      });
+    });
+
+    
+</script>
+{% endblock content %}

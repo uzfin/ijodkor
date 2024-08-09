@@ -1,0 +1,112 @@
+{% extends 'backend/main/base.html' %}
+{% block title %} Each Video {% endblock title %}
+{% block page_name %} Each Video {% endblock page_name %}
+
+{% block breadcrumb %} 
+<li class="breadcrumb-item"><a href="{% url 'manager_home' %}">Home</a></li>
+<li class="breadcrumb-item"><a href="{% url 'list_video_manager' %}">View Video</a></li>
+<li class="breadcrumb-item active">{{object.id}}</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+
+<style>
+    .card{
+        box-shadow: none !important;
+        margin-bottom: 1rem;
+    }
+    .card {
+        border-top: 3px solid #007bff !important;
+    }
+</style>
+<div class="card">
+  <div class="card-header">
+    <h2>ID: {{object.id}}</h2>
+    <a href="{% url 'edit_video' object.id %}" class="btn btn-primary">Update</a>&nbsp;
+    <a href="" class="btn btn-danger"  data-toggle="modal" data-target="#exampleModal{{object.id}}">Detele</a>
+  </div>
+  <!-- /.card-header -->
+  <div class="table-responsive">
+      <div class="card-body ">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <td>{{ object.id }}</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th>Video nomi</th>
+              <td>{{ object.title }}</td>
+            </tr>
+            <tr>
+              <th>Videoni ko'rish</th>
+              <td  style="cursor: pointer;" data-toggle="modal" data-target="#exampleModalfully{{object.id}}"><span class="fa fa-video-camera fa-1x text-primary"></span></td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+  </div>
+  <!-- /.card-body -->
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{object.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash-alt text-danger"></i> Foydalanuvchini o'chirish</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        <p class="text-center"><i class="fa fa-trash-alt fa-3x text-danger"></i></p>
+        <p class="text-center">O'chirishni hohlaysizmi?</p>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Yo'q</button>
+        <a href="{% url 'delete_video' object.id %}" type="button" class="btn btn-danger">Ha</a>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- View Sher Fully -->
+
+<div class="modal fade" id="exampleModalfully{{object.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-text text-primary"></i> Sherni to'liq matni</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-1">
+
+          </div>
+          <div class="col-md-10">
+            <video width="400" controls>
+                <source src="{{object.videofile.url}}" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+          </div>
+          <div class="col-md-1">
+
+          </div>
+        </div>
+      
+      </div>
+      <div class="modal-footer" style="background-color: #007bff;">
+      </div>
+  </div>
+  </div>
+</div>
+<!-- End View Sher Fully  -->
+{% endblock content %}

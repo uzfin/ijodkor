@@ -1,0 +1,145 @@
+{% extends 'backend/main/base.html' %}
+{% block title %} View Rassom {% endblock title %}
+{% block page_name %} View Rassom {% endblock page_name %}
+
+{% block breadcrumb %} 
+<li class="breadcrumb-item"><a href="{% url 'talant_home' %}">Home</a></li>
+<li class="breadcrumb-item active">View Rassom</li>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+
+<style>
+  .buttons-print {
+    background-color: #007bff !important;
+    color: white !important;
+    border: 2px solid #007bff !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+  }
+
+  .buttons-print:hover {
+    background-color: white !important;
+  color: #007bff !important;
+  border: 2px solid #007bff !important;
+  }
+    .card {
+        box-shadow: none !important;
+    }
+    .card {
+        border-top: 3px solid #007bff !important;
+    }
+</style>
+{% for message in messages %}
+  {% if message.tags == 'success' %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var m = '{{ message }}';
+        swal('Tabriklaymiz', m, "success")
+    </script>
+  {% endif %}
+{% endfor %}
+<div class="card">
+    <div class="row align-items-center">
+        <div class="col">
+            <div class="card-header">
+                <h3 class="card-title">Rassomlar ro'yxati</h3>
+              </div>
+        </div>
+        
+        <div class="col-auto text-right float-right ml-auto">
+            <div class="card-header">
+                <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
+                <a href="{% url 'create_rassom' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+              </div>
+          
+        </div>
+     </div>
+    <!-- /.card-header -->
+    <div class="table-responsive">
+        <div class="card-body ">
+            <table id="example" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>#ID</th>
+                <th>Rasm nomi</th>
+                <th>Rasm</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for rassom in rassoms %}
+              <tr>
+                <td>{{rassom.id}}</td>
+                <td>{{rassom.title}}</td>
+                <td class="text-center" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModalfully{{rassom.id}}"><span class="fa fa-image fa-1x bg-primary"></span></td>
+                <td class="text-center">{% if rassom.situation == 'Inactive'%} <i class="fa fa-times-circle text-danger"></i> {% else %} <i class="fa fa-check-circle text-success"></i> {% endif %}</td>
+                <td class="text-center"><a href="{% url 'each_view_rassom' rassom.id %}"><i class="fa fa-eye"></i></a> <a href="{% url 'update_rassom' rassom.id %}"><i class="fa fa-pencil"></i></a> <a href="" data-toggle="modal" data-target="#exampleModal{{rassom.id}}"><i class="fas fa-trash-alt"></i></a></td>
+              </tr>
+                <!-- Modal -->
+                    <div class="modal fade" id="exampleModal{{rassom.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash-alt text-danger"></i> Foydalanuvchini o'chirish</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                            <p class="text-center"><i class="fa fa-trash-alt fa-3x text-danger"></i></p>
+                            <p class="text-center">O'chirishni hohlaysizmi?</p>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Yo'q</button>
+                            <a href="{% url 'delete_rassom' rassom.id %}" type="button" class="btn btn-danger">Ha</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Barcha rasmlar -->
+
+                    <div class="modal fade" id="exampleModalfully{{rassom.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel"><span class="fa fa-image fa-1x bg-primary"></span> Barcha rasmlar</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                          </div>
+                          <div class="modal-body">
+                            <p class="text-center"><img src="{{ rassom.img.url }}" class="img-fluid rounded" alt="">
+                              <div class="row">
+                                {% for rasm in rassom.image_set.all %}
+                                  <div class="col-md-6 col-6 mb-lg-2">
+                                    <img src="{{ rasm.image.url }}" class="img-fluid rounded" alt="">
+                                  </div>
+                                {% endfor %}
+                              </div>
+                            </p>
+                          </div>
+                          <div class="modal-footer" style="background-color: #007bff;">
+                          </div>
+                      </div>
+                      </div>
+                  </div>
+                  <!-- End Barcha rasmlar  -->
+              {% endfor %}
+       
+              </tfoot>
+            </table>
+          </div>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- Button trigger modal -->
+
+
+  
+
+{% endblock content %}

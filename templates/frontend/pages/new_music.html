@@ -1,0 +1,118 @@
+{% extends 'frontend/main/base.html' %}
+{% block title %} O'zbekiston Finlandiya Pedagogika Instituti Yosh ijodkorlarni namoyon qilish portali {% endblock title %}
+{% block content %}		
+
+		<!--============================-->
+		<!--=        	Banner         =-->
+		<!--============================-->
+		<section class="page-header" data-bg-image="/static/media/background/music.jpg">
+			<div class="tim-container">
+				<div class="page-header-title text-center">
+					<h3>Yangi  musiqalar</h3>
+					<h2></h2>
+				</div>
+
+				<div class="breadcrumbs">
+					<a href="#">Bosh sahifa</a>
+					<span>/</span>
+					<span>Yangi musiqalar</span>
+				</div>
+
+			</div>
+			<!-- /.tim-container -->
+		</section>
+		<!-- /#page-header -->
+
+		<!--===========================-->
+		<!--=        	Tabs          =-->
+		<!--===========================-->
+		<section id="music-tabs" class="section-padding">
+			<div class="container">
+				<div class="tab-filter-wraper">
+					<div class="tab-details">
+						<ul class="details">
+							<li>Xonanda</li>
+							<li>Nomi</li>
+							<li>Ovozlar</li>
+							
+							<li>Ko'rilgan</li>
+                            <li>Yuklash</li>
+						</ul>
+					</div>
+
+					<div class="tim-isotope tim-isotope-3">
+						<ul class="tim-filter-items tabs-filter grid">
+							<li class="grid-sizer"></li>
+							
+							{% for song in list_exams %}
+							<li class="tim-songs-items grid-item jazz world rock tradinal">
+								<ul class="songs-details">
+									<li><a href="aritist.html"><a href="{{song.audio_file.url}}" class="sm2_button sm2_paused"><i></i>{{song.user}}</a></a></li>
+									<li>{{ song.song_title }}</li>
+									<li>
+										<aside class="entry-meta">
+											<span  class="comments">
+												<div class="like_dislike" id="like_dislike">
+													<div class="like" id="like_ajax_song{{song.id}}" val{{song.id}}="{{song.id}}" data-status="inactive">
+													<i id="like__icon" class="fa fa-thumbs-up" style="margin-left: 0px; color: transparent!important;
+													-webkit-text-stroke: 1px black;-webkit-text-fill-color: white;"></i>
+													<span class="number" id="number_song{{song.id}}">{{song.total_likes}}</span>
+													</div>
+													<span class="divider"></span>
+													<div class="dislike" id="dislike" data-status="inactive">
+													<i id="dislike__icon" class="fa fa-thumbs-down"  style="margin-left: 0px; color: transparent!important;
+													-webkit-text-stroke: 1px black;-webkit-text-fill-color: white;"></i>
+													</div>
+												</div>
+											</span>
+										</aside>
+									</li>
+									<li><i class="fa fa-eye"></i>4512</li>
+                                    <li><a href="{{ song.audio_file.url }}" target="_blank" class="song-download"><i class="fa fa-download"></i></a></li>
+								</ul>
+							</li>
+							<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+							<script>
+							$(document).ready(function () {
+								$('#like_ajax_song{{song.id}}').click(function() {
+									var value = $(this).attr('val{{song.id}}');
+									$.ajax({
+										url: '{% url "ajax_song" %}',
+										type: 'get',
+										data: {
+											button_text: value
+										},
+										success: function(response) {
+											$("#number_song{{song.id}}").text(response.qiymat);
+										}
+									});
+								});
+							})
+							</script>
+							{% endfor %}
+
+						</ul>
+					</div>
+				</div>
+
+				<nav class="posts-navigation text-center clearfix">
+					<ul>
+						{% if page_obj.has_previous %}
+							<li><a href="?page={{ page_obj.previous_page_number }}">Oldingi</a></li>
+						{% endif %}
+						
+						{% for item in page_obj.paginator.page_range %}
+						<li><a href="?page={{ item }}">{{ item }}</a></li>
+					  {% endfor %}
+						
+						{% if page_obj.has_next %}
+							<li><a href="?page={{ page_obj.next_page_number }}">Keyingi</a></li>
+						{% endif %}
+						
+					</ul>
+					<span>{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+				</nav>
+			</div>
+		</section>
+
+		{% endblock content %}		

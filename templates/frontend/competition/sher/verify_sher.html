@@ -1,0 +1,146 @@
+{% extends 'frontend/main/base.html' %}
+{% block title %} O'zbekiston Finlandiya Pedagogika Instituti Yosh ijodkorlarni namoyon qilish portali {% endblock title %}
+{% block content %}		
+
+<section class="page-header" data-bg-image="/static/media/background/video.jpg">
+    <div class="tim-container">
+        <div class="page-header-title text-center">
+            <h3>Verify Competition She'r</h3>
+            <h2></h2>
+        </div>
+
+        <div class="breadcrumbs">
+            <a href="#">Bosh sahifa</a>
+            <span>/</span>
+            <span>Verify Competition She'r</span>
+        </div>
+
+    </div>
+</section>
+    
+{% for message in messages %}
+  {% if message.tags == 'error' %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var m = '{{ message }}';
+        swal('Oops...', m, "error")
+    </script>
+  {% endif %}
+{% endfor %}
+
+    
+    
+<section style="background-color: #f4f6f9;">
+    <div class="container pt-5 pb-5">
+        <div class="card">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card-header">
+                        <h3 class="card-title">She'rlar ro'yxati</h3>
+                      </div>
+                </div>
+             </div>
+            <!-- /.card-header -->
+            <div class="table-responsive">
+                <div class="card-body ">
+                    <table id="example" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th>#ID</th>
+                        <th>She'r nomi</th>
+                        <th>She'rni o'qish</th>
+                        <th>Ko'rishlar soni</th>
+                        <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {% for sher in sher_comp %}
+                      <tr>
+                        <td>{{sher.id}}</td>
+                        <td>{{sher.title}}</td>
+                        <td class="text-center" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModalfully{{sher.id}}"><span class="fa fa-file-text fa-1x text-primary"></span></td>
+                        <td class="text-center">{{sher.votes.count}}</td>
+                        <td class="text-center"><a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalfullyVerify">Verify Sms</a></td>
+                      </tr>
+                            <!-- View Sher Fully -->
+                            <div class="modal fade" id="exampleModalfully{{sher.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-text text-primary"></i> {{sher.title}}</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="row">
+                                      <div class="col-md-1">
+        
+                                      </div>
+                                      <div class="col-md-10">
+                                        <p>{{sher.text|safe}}</p>
+                                      </div>
+                                      <div class="col-md-1">
+        
+                                      </div>
+                                    </div>
+                                  
+                                  </div>
+                                  <div class="modal-footer" style="background-color: #007bff;">
+                                  </div>
+                              </div>
+                              </div>
+                          </div>
+                          <!--  -->
+
+                       <!-- VERIFYs -->
+
+                       <div class="modal fade" id="exampleModalfullyVerify" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" style="color: #007bff;" id="exampleModalLabel"><span class="fa fa-lock fa-1x"></span> Tasdiqlash Kodi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row">
+                                 <form action="" method="post"> {% csrf_token %} 
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="verify_code" placeholder="Tasdiqlash kodini kiriting">
+                                        <div class="input-group-append">
+                                          <div class="input-group-text">
+                                            <span class="fa fa-lock"></span>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary">Jo'natish</button>
+                                 </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="background-color: #007bff;">
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                      {% endfor %}
+               
+                      </tfoot>
+                    </table>
+                  </div>
+            </div>
+          </div>
+    </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    console.log('++++++++++++++++++++++++++++++++++++++++')
+    $('#exampleModalfullyVerify').modal('show');
+  });
+</script>
+
+{% endblock content %}		

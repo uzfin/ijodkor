@@ -1,0 +1,43 @@
+{% extends 'backend/main/base.html' %}
+{% block title %} Home {% endblock title %}
+{% load static %}
+
+
+{% block content %}
+{% for message in messages %}
+  {% if message.tags == 'success' %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var m = '{{ message }}';
+        // swal('Muvaffaqiyatli yangilandi !', m, "info")
+    </script>
+  {% endif %}
+{% endfor %}
+
+<div class="col-md-12">
+    <div class="card card-primary" style="border-top: 3px solid #007bff !important;">
+      <form method="post">
+        {% csrf_token %}
+        
+        <div class="card-body">
+            
+            {{ form.as_p }}
+
+          
+
+
+          
+       
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </div>
+
+          
+      </form>
+    </div>
+  </div>
+  <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script>
+    CKEDITOR.replace('id_content');
+</script>
+{% endblock content %}

@@ -1,0 +1,96 @@
+{% extends 'backend/main/base.html' %}
+{% block title %} Each View {% endblock title %}
+{% block page_name %} Each View {% endblock page_name %}
+
+{% block breadcrumb %} 
+<li class="breadcrumb-item"><a href="{% url 'admn_home' %}">Home</a></li>
+<li class="breadcrumb-item"><a href="{% url 'view_talant' %}">View User</a></li>
+<li class="breadcrumb-item active">{{object.id}}</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+
+<style>
+    .card{
+        box-shadow: none !important;
+        margin-bottom: 1rem;
+    }
+    .card {
+        border-top: 3px solid #007bff !important;
+    }
+</style>
+<div class="card">
+  <div class="card-header">
+    <h2>ID: {{object.id}}</h2>
+    <a href="{% url 'talant_edit' object.id %}" class="btn btn-primary">Update</a>&nbsp;
+    <a href="" class="btn btn-danger"  data-toggle="modal" data-target="#exampleModal">Detele</a>
+  </div>
+  <!-- /.card-header -->
+  <div class="table-responsive">
+      <div class="card-body ">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>Ism</th>
+              <td>{{ object.artist.first_name }}</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th>Familya</th>
+              <td>{{ object.artist.last_name }}</td>
+            </tr>
+            <tr>
+              <th>Login</th>
+              <td>{{ object.artist }}</td>
+            </tr>
+            <tr>
+              <th>Tel raqam</th>
+              <td>{{ object.phone_number }}</td>
+            </tr>
+            <tr>
+              <th>Category</th>
+              <td>{{ category_all }}</td>
+            </tr>
+            <tr>
+              <th>Rasm</th>
+              <td><a href="{{ object.artist.profil_pic }}">{{ object.artist.profil_pic }}</a></td>
+            </tr>
+            <tr>
+              <th>Yaratilgan vaqt</th>
+              <td>{{ object.created_at }}</td>
+            </tr>
+            <tr>
+              <th>Yangilangan vaqt</th>
+              <td>{{ object.updated_at }}</td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+  </div>
+  <!-- /.card-body -->
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-trash-alt text-danger"></i> Foydalanuvchini o'chirish</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+    <p class="text-center"><i class="fa fa-trash-alt fa-3x text-danger"></i></p>
+    <p class="text-center">O'chirishni hohlaysizmi?</p>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-success" data-dismiss="modal">Yo'q</button>
+    <a href="{% url 'delete_talant' object.artist.id  %}" type="button" class="btn btn-danger">Ha</a>
+    </div>
+</div>
+</div>
+</div>
+{% endblock content %}

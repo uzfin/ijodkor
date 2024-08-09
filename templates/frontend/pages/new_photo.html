@@ -1,0 +1,116 @@
+{% extends 'frontend/main/base.html' %}
+{% block title %} O'zbekiston Finlandiya Pedagogika Instituti Yosh ijodkorlarni namoyon qilish portali {% endblock title %}
+{% block content %}		
+
+<section class="page-header" data-bg-image="/static/media/background/painter.jpg">
+	<div class="tim-container">
+		<div class="page-header-title text-center">
+			<h3>Yangi rasmlar</h3>
+			<h2></h2>
+		</div>
+		<div class="breadcrumbs">
+			<a href="#">Bosh sahifa</a>
+			<span>/</span>
+			<span>Yangi rasmlar</span>
+		</div>
+
+	</div>
+</section>
+	
+<section id="product" class="section-padding site-main">
+	<div class="tim-container">
+		<div class="section-title text-center">
+			<h2>Yangi <span>Rasmlar</span></h2>
+		</div>
+		<div class="woocommerce columns-4">
+			<ul class="products product-two wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="0.7s">
+				{% for rasm in list_exams %}
+					<li class="product clearfix">
+						<div class="product-thumb">
+							<a href="#"><img src="{{ rasm.img.url }}" height="230" class="attachment-shop_catalog" alt="Product"></a>
+							<a href="#" class="button add_to_cart_button ajax_add_to_cart"  data-toggle="modal" data-target="#exampleModalfully{{rasm.id}}">To'liq ko'rish</a>
+						</div>
+						<h5 class="album-name text-center" >{{rasm.title}} </h5>
+						<hr>
+						<span class="price">
+							<span class="woocommerce-Price-amount amount ">
+								<div class="like_dislike" id="like_dislike">
+									<div class="like" id="like_ajax_rasm{{rasm.id}}" val{{rasm.id}}="{{rasm.id}}" data-status="inactive">
+									<i id="like__icon" class="fa fa-thumbs-up" style="margin-left: 0px;"></i>
+									<span class="number" id="number_rasm{{rasm.id}}">{{rasm.total_likes}}</span>
+									</div>
+									<span class="divider"></span>
+									<div class="dislike" id="dislike" onclick="disliked()" data-status="inactive">
+									<i id="dislike__icon" class="fa fa-thumbs-down"></i>
+									</div>
+								</div>
+							</span>
+						</span>
+					</li>
+
+					<div class="modal fade" id="exampleModalfully{{rasm.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+							<h5 class="modal-title" style="color: #007bff;" id="exampleModalLabel"><span class="fa fa-image fa-1x"></span> {{ rasm.title }}ning barcha rasmlari</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							</div>
+							<div class="modal-body p-4">
+							  <p class="text-center"><img src="{{ rasm.img.url }}" class="img-fluid rounded" alt="">
+								<div class="row">
+								  {% for picture in rasm.image_set.all %}
+									<div class="col-md-6 col-6 mb-lg-2">
+									  <img src="{{ picture.image.url }}" class="img-fluid rounded" alt="">
+									</div>
+								  {% endfor %}
+								</div>
+							  </p>
+							</div>
+							<div class="modal-footer" style="background-color: #007bff;">
+							</div>
+						</div>
+						</div>
+					</div>
+					<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+					<script>
+					$(document).ready(function () {
+						$('#like_ajax_rasm{{rasm.id}}').click(function() {
+							var value = $(this).attr('val{{rasm.id}}');
+							$.ajax({
+								url: '{% url "ajax_rasm" %}',
+								type: 'get',
+								data: {
+									button_text: value
+								},
+								success: function(response) {
+									$("#number_rasm{{rasm.id}}").text(response.qiymat);
+								}
+							});
+						});
+					})
+					</script>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<nav class="posts-navigation text-center clearfix">
+		<ul>
+			{% if page_obj.has_previous %}
+				<li><a href="?page={{ page_obj.previous_page_number }}">Oldingi</a></li>
+			{% endif %}
+			
+			{% for item in page_obj.paginator.page_range %}
+			<li><a href="?page={{ item }}">{{ item }}</a></li>
+			{% endfor %}
+			
+			{% if page_obj.has_next %}
+				<li><a href="?page={{ page_obj.next_page_number }}">Keyingi</a></li>
+			{% endif %}
+			
+		</ul>
+		<span>{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+	</nav>
+</section>
+{% endblock content %}		
