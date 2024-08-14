@@ -1,6 +1,6 @@
 from  django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Sher, Artists, Rassom, Videos, Song, CustomUser
+from .models import Sher, Talant, Rassom, Videos, Song, CustomUser
 from django.contrib import messages
 from .forms import SherForm, RassomForm, VideoForm, SongForm
 from django.views.generic import ListView
@@ -227,20 +227,20 @@ def InActive_Rassom(request, pk):
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 
-class ArtistsListView(ListView):
-    model = Artists
+class TalantListView(ListView):
+    model = Talant
     template_name = "backend/Manager/pages/artist/view_talant.html"
     # paginate_by = 100  # if pagination is desired
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['talants'] = Artists.objects.all()
+        context['talants'] = Talant.objects.all()
         return context
 
 @login_required(login_url='login')
-def ArtistsDetailView(request, pk):
+def TalantDetailView(request, pk):
 
-    object = Artists.objects.get(id=pk)
+    object = Talant.objects.get(id=pk)
     category_all = ""
     for i in object.taland_category.values():
         category_all = category_all + str(i['name'])+"|"
@@ -265,7 +265,7 @@ def DeleteTalant(request, pk):
 @login_required(login_url='login')
 def Active_User(request, pk):
     talant = CustomUser.objects.get(id=pk)
-    talant_user = Artists.objects.get(artist=pk)
+    talant_user = Talant.objects.get(artist=pk)
     talant.is_active=True
     talant.save()
     tel = talant_user.phone_number[1:]
@@ -277,7 +277,7 @@ def Active_User(request, pk):
 @login_required(login_url='login')
 def Inactive_User(request, pk):
     talant = CustomUser.objects.get(id=pk)
-    talant_user = Artists.objects.get(artist=pk)
+    talant_user = Talant.objects.get(artist=pk)
     talant.is_active=False
     talant.save()
     tel = talant_user.phone_number[1:]

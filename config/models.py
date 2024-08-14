@@ -52,8 +52,8 @@ class TalandCategory(models.Model):
         verbose_name_plural = "Category"
 
 
-class Artists(models.Model):
-    artist=models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+class Talant(models.Model):
+    artist=models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='talant')
     taland_category=models.ManyToManyField(TalandCategory, related_name='categories', blank=True)
     phone_number = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -82,7 +82,7 @@ class Sher(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
     }
-    user = models.ForeignKey(Artists, on_delete=models.CASCADE)
+    user = models.ForeignKey(Talant, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     text = RichTextUploadingField(null=True)
     situation = models.CharField(max_length=50, choices=SITUATION, null=True, default='Active')
@@ -112,7 +112,7 @@ class Rassom(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
     }
-    user = models.ForeignKey(Artists, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(Talant, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=150)
     situation = models.CharField(max_length=50, choices=SITUATION, null=True, default='Inactive')
     img=models.ImageField(upload_to='IMAGE/images')
@@ -167,7 +167,7 @@ class Videos(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
     }
-    user = models.ForeignKey(Artists, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(Talant, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=150)
     situation = models.CharField(max_length=50, choices=SITUATION, null=True, default='Inactive')
     videofile = models.FileField(upload_to='VIDEOS/videos/', null=True, verbose_name="")
@@ -192,7 +192,7 @@ class Song(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
     }
-    user = models.ForeignKey(Artists, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(Talant, on_delete=models.CASCADE, null=True)
     song_title = models.CharField(max_length=250)
     audio_file = models.FileField(default='', upload_to="SONG/song")
     situation = models.CharField(max_length=50, choices=SITUATION, null=True, default='Inactive')
@@ -255,7 +255,7 @@ class Comp_Song(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
     }
-    user = models.ForeignKey(Artists, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(Talant, on_delete=models.CASCADE, null=True)
     song_title = models.CharField(max_length=250)
     audio_file = models.FileField(default='', upload_to="SONG/song")
     situation = models.CharField(max_length=50, choices=SITUATION, null=True, default='Inactive')
@@ -271,7 +271,7 @@ class Comp_Video(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
     }
-    user = models.ForeignKey(Artists, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(Talant, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=150)
     videofile = models.FileField(upload_to='COMPETITION/videos/', null=True, verbose_name="")
     situation = models.CharField(max_length=50, choices=SITUATION, null=True, default='Inactive')
@@ -286,7 +286,7 @@ class Comp_Sher(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
     }
-    user = models.ForeignKey(Artists, on_delete=models.CASCADE)
+    user = models.ForeignKey(Talant, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     text = RichTextUploadingField(null=True)
     situation = models.CharField(max_length=50, choices=SITUATION, null=True, default='Active')
@@ -305,7 +305,7 @@ class Comp_Rassom(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
     }
-    user = models.ForeignKey(Artists, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(Talant, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=150)
     situation = models.CharField(max_length=50, choices=SITUATION, null=True, default='Inactive')
     img=models.ImageField(upload_to='IMAGE/images')

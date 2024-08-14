@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, TalandCategory, Artists, Managers, Sher, LikeID, UnLikeID, Rassom, Image, Videos, Song, Counter, Comp_Song, Phone_numbers, SmsPhoneVerify, Comp_Video, Comp_Sher, Comp_Image, Comp_Rassom
+from .models import CustomUser, TalandCategory, Talant, Managers, Sher, LikeID, UnLikeID, Rassom, Image, Videos, Song, Counter, Comp_Song, Phone_numbers, SmsPhoneVerify, Comp_Video, Comp_Sher, Comp_Image, Comp_Rassom
 from django.utils.html import format_html
 from django.contrib.admin import SimpleListFilter
 from django.db.models import Q
@@ -28,7 +28,7 @@ admin.site.register(TalandCategory, TalandCategoryAdmin)
 
 class ArtistAdmin(admin.ModelAdmin):
     list_display = ('artist', 'phone_number', 'created_at')
-admin.site.register(Artists, ArtistAdmin)
+admin.site.register(Talant, ArtistAdmin)
 
 class ManagerAdmin(admin.ModelAdmin):
     list_display = ('manager', 'created_at')

@@ -1,6 +1,6 @@
 from  django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Sher, Artists, Rassom, Videos, Song
+from .models import Sher, Talant, Rassom, Videos, Song
 from django.contrib import messages
 from .forms import SherForm, RassomForm, VideoForm, SongForm
 
@@ -30,13 +30,13 @@ def talant_home(request):
 # ==================================== SHER ======================================
 @login_required(login_url='login')
 def ADD_SHER(request):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "She'r":
             if request.method == 'POST':
                 form = SherForm(request.POST)
                 if form.is_valid():
                     cd = form.cleaned_data
-                    talant = Artists.objects.get(artist = request.user)
+                    talant = Talant.objects.get(artist = request.user)
                     sher = Sher(
                         user=talant,
                         title=cd['title'],
@@ -56,9 +56,9 @@ def ADD_SHER(request):
 
 @login_required(login_url='login')
 def VIEW_SHER(request):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "She'r":
-            artist = Artists.objects.get(artist=request.user)
+            artist = Talant.objects.get(artist=request.user)
             shers = Sher.objects.filter(user=artist, deleted=False)
 
             context = {
@@ -69,7 +69,7 @@ def VIEW_SHER(request):
 
 @login_required(login_url='login')
 def SherDetailView(request, pk):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "She'r":
             object = Sher.objects.get(id=pk)
             context = {
@@ -80,7 +80,7 @@ def SherDetailView(request, pk):
 
 @login_required(login_url='login')
 def EditSher(request, pk):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "She'r":
             sher = Sher.objects.get(id=pk)
             if request.method == 'GET':
@@ -101,7 +101,7 @@ def EditSher(request, pk):
    
 @login_required(login_url='login')
 def DeleteSher(request, pk):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "She'r":
             sher = Sher.objects.get(id=pk)
             sher.deleted=True
@@ -129,13 +129,13 @@ def InActive_Sher(request, pk):
 
 # ================================== Videos ========================================
 def ADD_VIDEO(request):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Video":
             if request.method == 'POST':
                 form = VideoForm(request.POST, request.FILES)
                 if form.is_valid():
                     cd = form.cleaned_data
-                    talant = Artists.objects.get(artist = request.user)
+                    talant = Talant.objects.get(artist = request.user)
                     video = Videos(
                         user=talant,
                         title=cd['title'],
@@ -154,9 +154,9 @@ def ADD_VIDEO(request):
     return redirect('talant_home')
 
 def LIST_VIDEOS(request):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Video":
-            artist = Artists.objects.get(artist=request.user)
+            artist = Talant.objects.get(artist=request.user)
             videos = Videos.objects.filter(user=artist, deleted=False)
 
             context = {
@@ -166,7 +166,7 @@ def LIST_VIDEOS(request):
     return redirect('talant_home')
 
 def VideoDetailView(request, pk):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Video":
             object = Videos.objects.get(id=pk)
             context = {
@@ -176,7 +176,7 @@ def VideoDetailView(request, pk):
     return redirect('talant_home')
 
 def EditVideo(request, pk):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Video":
             video = Videos.objects.get(id=pk)
             if request.method == 'GET':
@@ -195,7 +195,7 @@ def EditVideo(request, pk):
     return redirect('talant_home')
         
 def DeleteVideo(request, pk):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Video":
             video = Videos.objects.get(id=pk)
             video.deleted=True
@@ -215,14 +215,14 @@ class RassomInline():
     template_name = "backend/Talant/pages/rassom/rassom_create_or_update.html"
 
     def form_valid(self, form):
-        for i in self.request.user.artists.taland_category.all():
+        for i in self.request.user.talant.taland_category.all():
             if i.name == "Rasm":
                 named_formsets = self.get_named_formsets()
                 if not all((x.is_valid() for x in named_formsets.values())):
                     return self.render_to_response(self.get_context_data(form=form))
                 
                 self.object = form.save()
-                talant = Artists.objects.get(artist = self.request.user)
+                talant = Talant.objects.get(artist = self.request.user)
                 self.object.user = talant
                 self.object = form.save()
 
@@ -308,7 +308,7 @@ class RassomList(ListView):
         return Rassom.objects.filter(deleted=False)
 
 def RassomDetailView(request, pk):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Rasm":
             object = Rassom.objects.get(id=pk)
             context = {
@@ -319,7 +319,7 @@ def RassomDetailView(request, pk):
 
 
 def DeleteRassom(request, pk):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Rasm":
             rassom = Rassom.objects.get(id=pk)
             rassom.deleted=True
@@ -333,13 +333,13 @@ def DeleteRassom(request, pk):
 
 # ================================== SONG ========================================
 def ADD_SONG(request):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Qo'shiq":
             if request.method == 'POST':
                 form = SongForm(request.POST, request.FILES)
                 if form.is_valid():
                     cd = form.cleaned_data
-                    talant = Artists.objects.get(artist = request.user)
+                    talant = Talant.objects.get(artist = request.user)
                     video = Song(
                         user=talant,
                         song_title=cd['song_title'],
@@ -358,9 +358,9 @@ def ADD_SONG(request):
     return redirect('talant_home')
 
 def LIST_SONGS(request):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Qo'shiq":
-            artist = Artists.objects.get(artist=request.user)
+            artist = Talant.objects.get(artist=request.user)
             songs = Song.objects.filter(user=artist, deleted=False)
 
             context = {
@@ -370,7 +370,7 @@ def LIST_SONGS(request):
     return redirect('talant_home')
 
 def SongDetailView(request, pk):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Qo'shiq":
 
             object = Song.objects.get(id=pk)
@@ -381,7 +381,7 @@ def SongDetailView(request, pk):
     return redirect('talant_home')
 
 def EditSong(request, pk):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Qo'shiq":
             video = Song.objects.get(id=pk)
             if request.method == 'GET':
@@ -400,7 +400,7 @@ def EditSong(request, pk):
     return redirect('talant_home')
         
 def DeleteSong(request, pk):
-    for i in request.user.artists.taland_category.all():
+    for i in request.user.talant.taland_category.all():
         if i.name == "Qo'shiq":
             song = Song.objects.get(id=pk)
             song.deleted=True

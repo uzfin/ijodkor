@@ -2,7 +2,7 @@ from django.urls import path
 from config import manager_views
 from django.conf import settings
 from django.conf.urls.static import static
-from .manager_views import RassomList, ArtistsListView
+from .manager_views import RassomList, TalantListView
 
 urlpatterns = [
     path('home', manager_views.manager_home, name='manager_home'),
@@ -41,8 +41,8 @@ urlpatterns = [
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-    path("talant/lists", ArtistsListView.as_view(), name="artist_lists"),
-    path("talant/detail/<int:pk>/", manager_views.ArtistsDetailView, name="talantdetail"),
+    path("talant/lists", TalantListView.as_view(), name="artist_lists"),
+    path("talant/detail/<int:pk>/", manager_views.TalantDetailView, name="talantdetail"),
     path('talant/delete/<int:pk>', manager_views.DeleteTalant, name='delete_artist'),
     path('active_user/<int:pk>', manager_views.Active_User, name='active_artist'),
     path('inactive_user/<int:pk>', manager_views.Inactive_User, name='inactive_artist'),

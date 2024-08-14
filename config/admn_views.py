@@ -41,7 +41,7 @@ def ADD_TALANT(request):
         category = request.POST.getlist('category')
         tel_number = request.POST.get('tel_number')
         
-        if Artists.objects.filter(phone_number=tel_number).exists():
+        if Talant.objects.filter(phone_number=tel_number).exists():
             messages.warning(request, 'Bunaqa telefon nomer bor')
             return redirect('add_talant')
         if CustomUser.objects.filter(username=login).exists():
@@ -52,7 +52,7 @@ def ADD_TALANT(request):
         user = CustomUser(first_name=ism, last_name=familya, username=login, profil_pic=rasm, user_type="USER")
         user.set_password(parol)
         user.save()
-        artist_model = Artists(artist=user, phone_number=tel_number)
+        artist_model = Talant(artist=user, phone_number=tel_number)
         artist_model.save()
         for i in category:
            artist_model.taland_category.add(TalandCategory.objects.get(id=i))
@@ -66,20 +66,20 @@ def ADD_TALANT(request):
 
 
 class ArtistListView(ListView):
-    model = Artists
+    model = Talant
     template_name = "backend/Admn/pages/users/view_talant.html"
     # paginate_by = 100  # if pagination is desired
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['talants'] = Artists.objects.all()
+        context['talants'] = Talant.objects.all()
         return context
 
 
 @login_required(login_url='login')
 def ArtistDetailView(request, pk):
 
-    object = Artists.objects.get(id=pk)
+    object = Talant.objects.get(id=pk)
     category_all = ""
     for i in object.taland_category.values():
         category_all = category_all + str(i['name'])+"|"
@@ -98,7 +98,7 @@ def EditTalant(request, pk):
             return redirect('manager_home')
         else:
             return redirect('talant_home')
-    talant = Artists.objects.get(id=pk)
+    talant = Talant.objects.get(id=pk)
     
 
     category_selected = talant.taland_category.values()
@@ -140,7 +140,7 @@ def UpdateTalant(request):
             user.profil_pic = rasm
         user.save()
 
-        artist = Artists.objects.get(artist=artist_id)
+        artist = Talant.objects.get(artist=artist_id)
         # category_model = TalandCategory.objects.get(id=category_id)
         artist.taland_category.set('')
 
@@ -166,7 +166,7 @@ def DeleteTalant(request, pk):
 @login_required(login_url='login')
 def Active_User(request, pk):
     talant = CustomUser.objects.get(id=pk)
-    talant_user = Artists.objects.get(artist=pk)
+    talant_user = Talant.objects.get(artist=pk)
     talant.is_active=True
     talant.save()
     tel = talant_user.phone_number[1:]
@@ -178,7 +178,7 @@ def Active_User(request, pk):
 @login_required(login_url='login')
 def Inactive_User(request, pk):
     talant = CustomUser.objects.get(id=pk)
-    talant_user = Artists.objects.get(artist=pk)
+    talant_user = Talant.objects.get(artist=pk)
     talant.is_active=False
     talant.save()
     tel = talant_user.phone_number[1:]

@@ -10,8 +10,7 @@ from django.core.files.temp import NamedTemporaryFile
 from django.conf import settings
 from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import Http404, JsonResponse, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.contrib import messages
@@ -19,11 +18,8 @@ from django.contrib.auth import login, logout
 from config.LoginBackend import LoginBackend
 from config.models import TalandCategory, Sher, Song, Videos,Counter, Comp_Song, Phone_numbers, SmsPhoneVerify, Comp_Video, Comp_Rassom
 from config.utils import send_sms, generateCode, oAuth2Client
-from django.http import JsonResponse
 from django.views.generic.list import ListView
-from django.core.paginator import Paginator
-from django.core.paginator import EmptyPage
-from django.core.paginator import PageNotAnInteger
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import View
 
 
@@ -41,12 +37,15 @@ def index(request):
     songs_new = Song.objects.filter(situation='Active', deleted=False).order_by("-id")[:6]
     videos = Videos.objects.filter(situation='Active', deleted=False).order_by("-id")[:6]
     rasmlar = Rassom.objects.filter(situation="Active", deleted=False).order_by("-id")[:6]
-    counter = Counter.objects.get(id=1)
+    try:
+        counter = Counter.objects.get(id=1)
+    except Counter.DoesNotExist:
+        counter = {}
 
     oauth2client = oAuth2Client(
         client_id="6",
         client_secret="Lmf34scxVvECzfF4ljXAe7sIdVjJ1hO6nq6-7c7E",
-        redirect_uri="https://77af-195-158-14-110.ngrok-free.app/callback/",
+        redirect_uri="https://24eb-195-158-14-110.ngrok-free.app/callback/",
         authorize_url="https://student.uzfi.uz/oauth/authorize",
         token_url="https://student.uzfi.uz/oauth/access-token",
         resource_owner_url="https://student.uzfi.uz/oauth/api/user?fields=id,uuid,type,name,login,picture,email,university_id,phone"
@@ -867,7 +866,7 @@ class AuthCallbackView(View):
         client = oAuth2Client(
             client_id="6",
             client_secret="Lmf34scxVvECzfF4ljXAe7sIdVjJ1hO6nq6-7c7E",
-            redirect_uri="https://77af-195-158-14-110.ngrok-free.app/callback/",
+            redirect_uri="https://24eb-195-158-14-110.ngrok-free.app/callback/",
             authorize_url="https://student.uzfi.uz/oauth/authorize",
             token_url="https://student.uzfi.uz/oauth/access-token",
             resource_owner_url="https://student.uzfi.uz/oauth/api/user?fields=id,uuid,type,name,login,picture,email,university_id,phone"
