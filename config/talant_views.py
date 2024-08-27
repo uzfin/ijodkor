@@ -1,6 +1,6 @@
 from  django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Sher, Talant, Rassom, Videos, Song
+from .models import Sher, Talant, Rassom, Videos, Song, TalandCategory
 from django.contrib import messages
 from .forms import SherForm, RassomForm, VideoForm, SongForm
 
@@ -15,15 +15,19 @@ from .forms import (
 )
 from .models import (
     Image,
-    Rassom
+    Rassom,
 )
 
 
 
 @login_required(login_url='login')
 def talant_home(request):
+    categories = TalandCategory.objects.all()
+
     ctx = {
-        "user": request.user
+        "user": request.user,
+        "categories": categories,
+        "own_categories": request.user.talant.taland_category.all(),
     }
     return render(request, 'backend/Talant/index.html', ctx)
 

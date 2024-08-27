@@ -12,4 +12,37 @@
   {% endif %}
 {% endfor %}
     <h1>Talant Page</h1>
+    <h2>Add categories</h2>
+    <div class="col-md-12">
+      <div class="card card-primary" style="border-radius: 2px solid #007bff;">
+        <form method="post" onsubmit="return validateFormTalant()" enctype="multipart/form-data" autocomplete="off">
+          {% csrf_token %}
+          <div class="card-body">
+
+            <div class="form-group">
+              <label>Category</label>
+              <select id="multipleselect" name="category" placeholder="Categoriyalarni tanlang !!!" multiple>
+                {% for category in categories %}
+                  {% if category in own_categories %}
+                  <option value="{{category.id}}">{{category.name}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+  
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+          </div>
+  
+            
+        </form>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function(){
+      var multipleSelectButton = new Choices('#multipleselect', {
+      removeItemButton: true,
+      // maxItemCount:5,
+      });
+      });
+      </script>
 {% endblock content %}
