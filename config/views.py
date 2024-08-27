@@ -45,7 +45,7 @@ def index(request):
     oauth2client = oAuth2Client(
         client_id="6",
         client_secret="Lmf34scxVvECzfF4ljXAe7sIdVjJ1hO6nq6-7c7E",
-        redirect_uri="https://24eb-195-158-14-110.ngrok-free.app/callback/",
+        redirect_uri="https://ijodkor.uzfi.uz/callback/",
         authorize_url="https://student.uzfi.uz/oauth/authorize",
         token_url="https://student.uzfi.uz/oauth/access-token",
         resource_owner_url="https://student.uzfi.uz/oauth/api/user?fields=id,uuid,type,name,login,picture,email,university_id,phone"
@@ -866,7 +866,7 @@ class AuthCallbackView(View):
         client = oAuth2Client(
             client_id="6",
             client_secret="Lmf34scxVvECzfF4ljXAe7sIdVjJ1hO6nq6-7c7E",
-            redirect_uri="https://24eb-195-158-14-110.ngrok-free.app/callback/",
+            redirect_uri="https://ijodkor.uzfi.uz/callback/",
             authorize_url="https://student.uzfi.uz/oauth/authorize",
             token_url="https://student.uzfi.uz/oauth/access-token",
             resource_owner_url="https://student.uzfi.uz/oauth/api/user?fields=id,uuid,type,name,login,picture,email,university_id,phone"
