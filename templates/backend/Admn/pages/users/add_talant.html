@@ -36,28 +36,14 @@
         <div class="card-body">
 
           <div class="form-group">
-            <label>Ism</label>
-            <input type="text" class="form-control ism" id="ism" name="ism" placeholder="Ismingizni kiriting">
+            <label>User</label>
+            <select id="singleselect-user" name="user" placeholder="Foydalanuvchini tanlang !!!">
+              {% for user in users %}
+                <option value="{{user.id}}">{{user.username}}</option>
+              {% endfor %}
+            </select>
           </div>
 
-          <div class="form-group">
-            <label>Familya</label>
-            <input type="text" class="form-control familya" id="familya" name="familya" placeholder="Familyangizni kiriting">
-          </div>
-
-
-           <!-- phone mask -->
-           <div class="form-group">
-            <label>Telefon raqam:</label>
-
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-phone"></i></span>
-              </div>
-              <input type="text" class="form-control phone" id="phone" name="tel_number" data-inputmask='"mask": "+998(99) 999-99-99"' data-mask>
-            </div>
-          </div>
-          
           <div class="form-group">
             <label>Category</label>
             <select id="multipleselect" name="category" placeholder="Categoriyalarni tanlang !!!" multiple>
@@ -66,15 +52,6 @@
               {% endfor %}
             </select>
           </div>
-          <div class="form-group">
-            <label>Login</label>
-            <input type="text" class="form-control login" id="login" name="login" placeholder="Login kiriting">
-          </div>
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="parol" class="form-control parol" id="parol" placeholder="Password">
-          </div>
-          
 
           <div class="mb-3">
               <div class="mb-3" style="font-size: 14px;"><i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp; O'zingizni rasmingizni yuklang!</div>

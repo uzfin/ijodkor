@@ -33,34 +33,23 @@ def ADD_TALANT(request):
             return redirect('talant_home')
     categories = TalandCategory.objects.all()
     if request.method == 'POST':
-        ism = request.POST.get('ism')
-        familya = request.POST.get('familya')
-        login = request.POST.get('login')
-        parol = request.POST.get('parol')
-        rasm = request.FILES.get('rasm')
+        user_id = request.POST.get('ism')
         category = request.POST.getlist('category')
-        tel_number = request.POST.get('tel_number')
-        
-        if Talant.objects.filter(phone_number=tel_number).exists():
-            messages.warning(request, 'Bunaqa telefon nomer bor')
-            return redirect('add_talant')
-        if CustomUser.objects.filter(username=login).exists():
-            messages.warning(request, 'Bu nomli foydalanuvchi bor')
-            return redirect('add_talant')
 
-        
-        user = CustomUser(first_name=ism, last_name=familya, username=login, profil_pic=rasm, user_type="USER")
-        user.set_password(parol)
-        user.save()
-        artist_model = Talant(artist=user, phone_number=tel_number)
-        artist_model.save()
-        for i in category:
-           artist_model.taland_category.add(TalandCategory.objects.get(id=i))
-        messages.success(request, "Yangi foydalanuvchi qo/'shildi")
-        return redirect('view_talant')
+        user = CustomUser.objects.get(id=user_id)
+        try:
+            artist_model = Talant(artist=user, phone_number=user.phone_number)
+            artist_model.save()
+            for i in category:
+                artist_model.taland_category.add(TalandCategory.objects.get(id=i))
+            messages.success(request, "Yangi foydalanuvchi qo/'shildi")
+            return redirect('view_talant')
+        except:
+            return redirect("add_talant")
 
     context = {
         'categories':categories,
+        'users': CustomUser.objects.filter(user_type="USER")
     }
     return render(request, 'backend/Admn/pages/users/add_talant.html', context)
 
