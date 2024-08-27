@@ -33,7 +33,7 @@ def ADD_TALANT(request):
             return redirect('talant_home')
     categories = TalandCategory.objects.all()
     if request.method == 'POST':
-        user_id = request.POST.get('ism')
+        user_id = request.POST.get('user')
         category = request.POST.getlist('category')
 
         user = CustomUser.objects.get(id=user_id)
